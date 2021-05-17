@@ -24,6 +24,8 @@ function isGameOver(){
 function reset(){
     setPlayerPosition(1800,1800);
     winner='none';
+    player.body.setVelocityX(0);
+    player.body.setVelocityY(0);
     player.x=1800;
     player.y=1800;
     for(var i=0;i<players.length;i++){

@@ -84,6 +84,9 @@ function update(){
         controlPlayer();
         //update enemny positions on game
         updateEnemyPos();
+
+        //check ig game won
+        isWon();
     }
 }
 

@@ -2,6 +2,7 @@
 let playerPosition={};
 let isPlayerAdmin=false;
 let playerUsername;
+let room;
 function setPlayerPosition(x,y){
     playerPosition={x,y};
     //emit current player position to server
