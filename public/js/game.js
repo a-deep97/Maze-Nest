@@ -112,6 +112,8 @@ socket.on('new join info',(USERS)=>{
     //add previous users to database
     for(var i=0;i<USERS.length;i++){
         insertPlayer(USERS[i].username,USERS[i].id);
+        //all current players added to online panel
+        addOnlinePlayer(USERS.username);
     }
     //make player admin if applicable 
     makeAdmin();
@@ -119,7 +121,8 @@ socket.on('new join info',(USERS)=>{
 //adding players to data
 socket.on('player added',({username,ID})=>{
     insertPlayer(username,ID);
-    enemies[players.length-1].visible=true;
+    //newplayer added to online panel
+    addOnlinePlayer(username);
 });
 //get other  player's positions
 socket.on('get position',({ID,x,y})=>{

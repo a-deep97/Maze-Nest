@@ -70,7 +70,14 @@ function gameStatusInfo(){
     }
 }
 /* --------------------------------------------*/
-
+//add online players to panel
+function addOnlinePlayer(name){
+    const panel=document.getElementById('online-players');
+    const onlinePlayer=document.createElement('div');
+    onlinePlayer.className='online-player';
+    onlinePlayer.innerHTML=name;
+    panel.appendChild(onlinePlayer);
+}
 /* --------------------------------------------*/
 
 
