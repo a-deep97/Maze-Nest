@@ -22,11 +22,17 @@ const socket=io();
 //createing new game instance
 const Game=new Phaser.Game(config);
 
-//variables
+/*------global  variables----------*/
 let player;
 let enemies=[];
 let speed=300;
 let gameStatus='ready';
+let winner='none';
+/*------on load functions----------*/
+//update gamestatus info panel
+gameStatusInfo();
+/*------------------------------------*/
+
 //preload function
 function preload(){
 
@@ -66,6 +72,8 @@ function create(){
 
     //key press event
     keys=this.input.keyboard.createCursorKeys();
+
+    
 }
 //update function
 function update(){
@@ -111,6 +119,7 @@ socket.on('new join info',(USERS)=>{
 //adding players to data
 socket.on('player added',({username,ID})=>{
     insertPlayer(username,ID);
+    enemies[players.length-1].visible=true;
 });
 //get other  player's positions
 socket.on('get position',({ID,x,y})=>{

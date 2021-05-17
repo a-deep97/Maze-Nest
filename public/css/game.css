@@ -9,7 +9,25 @@
 #navbar{
     display: flex;
     width: 100%;
-    height: 30px;
+    height: 0px;
+}
+#info-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    height: 15%;
+}
+#game-status-container{
+    display: flex;
+    width: 60%;
+    height: 90%;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    border-radius: 20px;
+    background-color: black;
+    color: white;
 }
 #main-section{
     display: flex;
@@ -25,14 +43,14 @@
     justify-content: center;
     align-items: center;
     width: 99%;
-    height: 100%;
+    height: 90%;
 }
 #gameWindow{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 750px;
+    height: 100%;
 }
 #game-panels{
     display: flex;
@@ -103,6 +121,7 @@
     background-color: azure;
     border: solid 1px black;
 }
+
 #panel2{
     display: flex;
     justify-content: flex-start;
