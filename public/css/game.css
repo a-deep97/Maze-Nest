@@ -1,0 +1,156 @@
+
+:root{
+
+}
+#html , body{
+    margin: 0px;
+}
+
+#navbar{
+    display: flex;
+    width: 100%;
+    height: 30px;
+}
+#main-section{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 800px;
+    background-color: teal;
+}
+#game-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 99%;
+    height: 100%;
+}
+#gameWindow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 750px;
+}
+#game-panels{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 20%;
+    background-color: aqua;
+}
+#panel1{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    height: 80%;
+    width: 95%;
+    margin: 3px;
+    background-color: brown;
+}
+#panel1-heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+}
+#room-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+}
+#panel1-controls{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+}
+.control-buttons{
+    width: 70%;
+    height: 70%;
+    margin: 5px;
+}
+#online-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 65%;
+}
+#online-heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+}
+#online-players{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    height: 80%;
+    background-color: azure;
+    border: solid 1px black;
+}
+#panel2{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    height: 80%;
+    width: 95%;
+    margin: 3px;
+    background-color: brown;
+}
+#panel2-heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+}
+#chat-section{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 80%;
+}
+#chat-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80%;
+}
+#chat-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+}
+#chat-form input{
+    height: 70%;
+    margin: 5px;
+}
+
+#section2{
+
+}
+footer{
+
+}
+

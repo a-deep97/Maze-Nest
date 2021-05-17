@@ -4,27 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/game.css">
     <script src="../socket.io/socket.io.js"></script>
     <title>Document</title>
-    <style>
-        html,
-        body {
-          margin: 0 auto;
-          padding: 0;
-          width: 100%;
-          height: 100%;
-        }
-    
-        #game {
-          margin: 10px auto;
-          padding: 0;
-          width: 1200px;
-          height: 750px;
-        }
-    </style>
 </head>
 <body>
-    <div id="game"></div>
+    <header></header>
+    <nav id="navbar"></nav>
+    <section id="main-section">
+        <div id="info-container"></div>
+        <div id="game-container">
+            <div id="game-panels">
+                <div id="panel1">
+                    <div id="panel1-heading">maze runner</div>
+                    <div id="room-info">Room: </div>
+                    <div id="panel1-controls">
+                        <button class="control-buttons" id="button1"></button>
+                        <button class="control-buttons" id="button2">Start</button>
+                        <button class="control-buttons" id="button3">Leave</button>
+                    </div>
+                    <div id="online-container">
+                        <div id="online-heading">Online players</div>
+                        <div id="online-players"></div>
+                    </div>
+                </div>
+                <div id="panel2">
+                    <div id="panel2-heading">Chat box</div>
+                    <div id="chat-section">
+                        <div id="chat-container"></div>
+                        <form action="" id="chat-form">
+                            <input type="text" name="chat_message" id="chat-message">
+                            <button class="control-buttons" id="message-button">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="gameWindow"></div>
+        </div>
+    </section>
+    <section id="section2"></section>
+    <div id="footer">Created be Aman | contact @ : a.deep97@outlook.com</div>
+    <!-- scripts -->
     <script src="//cdn.jsdelivr.net/npm/phaser@3.17.0/dist/phaser.min.js"></script>
     <script src="./js/players.js"></script>
     <script src="./js/self.js"></script>

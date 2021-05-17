@@ -1,6 +1,6 @@
 const config={
     type: Phaser.AUTO,
-    parent:'game',
+    parent:'gameWindow',
     scale:{
         mode: Phaser.Scale.RESIZE,
         autoCenter: Phaser.Scale.CENTER_BOTH
@@ -69,7 +69,6 @@ function create(){
 }
 //update function
 function update(){
-    console.log(gameStatus);
     player.body.setVelocityY(0);
     player.body.setVelocityX(0);
     if(gameStatus=='ready'&&keys.space.isDown){
