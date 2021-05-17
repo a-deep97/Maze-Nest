@@ -37,9 +37,9 @@ io.on('connection',(socket)=>{
         //broadcast new player
         socket.broadcast.emit('player added',{username,ID});
     });
-    socket.on('self position',({pos_x,pos_y})=>{
+    socket.on('self position',({x,y})=>{
         const ID=socket.id;
-        socket.broadcast.emit('get position',{ID,pos_x,pos_y});
+        socket.broadcast.emit('get position',{ID,x,y});
     });
 
     //game events

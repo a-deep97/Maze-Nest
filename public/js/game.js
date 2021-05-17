@@ -69,84 +69,13 @@ function create(){
 }
 //update function
 function update(){
-    player.body.setVelocityY(0);
-    player.body.setVelocityX(0);
-    if(gameStatus=='ready'&&keys.space.isDown){
-        startGame();
-        //send signal to server for game start
-        socket.emit('send game start');
-    }
-    else if(gameStatus=='running'&&keys.shift.isDown){
-        //emit about the restart event
-        socket.emit('send game restart');
-        gameRestart();
-    }
+    
+    // game running loop
     if(gameStatus=='running'){
-        if(keys.left.isDown){
-            player.body.setVelocityX(-1*speed);
-        }
-        else if(keys.right.isDown){
-            player.body.setVelocityX(1*speed);
-        }
-        else if(keys.up.isDown){
-            player.body.setVelocityY(-1*speed);
-        }
-        else if(keys.down.isDown){
-            player.body.setVelocityY(1*speed);
-        }
-        //set player position on each frame
-        setPlayerPosition(player.x,player.y);
-        //send player position to server
-        const pos_x=player.x;
-        const pos_y=player.y;
-        socket.emit('self position',{pos_x,pos_y});
+        //control player movement
+        controlPlayer();
         //update enemny positions on game
-        for(var i=0;i<players.length;i++){
-            enemies[i].x=players[i].pos_x;
-            enemies[i].y=players[i].pos_y;
-        }
-    }
-}
-
-// start game
-function startGame(){
-    gameStatus='running';
-}
-//check if won
-function isWon(){
-    if(player.x<player.width/2||player.x>4000+player.width/2||player.y<player.height/2||player.x>+3864+player.height/2){
-        gameStatus='won';
-        //send signal to server for winning
-        socket.emit('send game won');
-    }
-}
-//check game over
-function isGameOver(){
-
-}
-//restart game
-function gameRestart(){
-    gameStatus='ready';
-    reset();
-}
-//reset game
-function reset(){
-
-    setPlayerPosition(1800,1800);
-    player.x=1800;
-    player.y=1800;
-    for(var i=0;i<players.length;i++){
-        players[i].pos_x=1800;
-        players[i].pos_y=1800;
-        enemies[i].x=1800;
-        enemies[i].y=1800;
-    }
-}
-
-//function make admin if applicable
-function makeAdmin(){
-    if(players.length==0){
-        isPlayerAdmin=true;
+        updateEnemyPos();
     }
 }
 
@@ -176,12 +105,14 @@ socket.on('new join info',(USERS)=>{
     for(var i=0;i<USERS.length;i++){
         insertPlayer(USERS[i].username,USERS[i].id);
     }
+    //make player admin if applicable 
+    makeAdmin();
 });
 //adding players to data
 socket.on('player added',({username,ID})=>{
     insertPlayer(username,ID);
 });
 //get other  player's positions
-socket.on('get position',({ID,pos_x,pos_y})=>{
-    setPosition(ID,pos_x,pos_y);
+socket.on('get position',({ID,x,y})=>{
+    setPosition(ID,x,y);
 });
