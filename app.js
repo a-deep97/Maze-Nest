@@ -2,6 +2,10 @@ const express=require('express');
 const app=express();
 const http=require('http').Server(app);
 const io=require('socket.io')(http);
+const bodyParser=require('body-parser');
+const path=require('path');
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //importing USERS instance
 const Users=require('./utils/USERS');
@@ -9,17 +13,20 @@ const Users=require('./utils/USERS');
 //specifying static folder(public)
 app.use(express.static('public'));
 
+// setup view engine (i.e. : ejs)
+app.set('view engine','ejs');
 
 //getting pages
 
 app.get('/',(req,res)=>{
-    res.sendfile('game');
+    res.render('index');
 });
 app.post('/',(req,res)=>{
-
+    console.log(req.body);
+    res.redirect('/game');
 });
-app.get('game',(req,res)=>{
-
+app.get('/game',(req,res)=>{
+    res.render('game');
 });
 
 //socket connection

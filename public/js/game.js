@@ -19,6 +19,7 @@ const config={
 };
 //initiating socket instance
 const socket=io();
+
 //createing new game instance
 const Game=new Phaser.Game(config);
 
