@@ -7,8 +7,9 @@ const path=require('path');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//importing USERS instance
+//importing util instances instance
 const Users=require('./utils/USERS');
+const Auth=require('./utils/authentication');
 
 //specifying static folder(public)
 app.use(express.static('public'));
@@ -19,11 +20,22 @@ app.set('view engine','ejs');
 //getting pages
 
 app.get('/',(req,res)=>{
+    let error='';
+    error=req.query.error;
+    console.log(error);
     res.render('index');
 });
 app.post('/',(req,res)=>{
-    //redirecting to game route with query string including username and room
-    res.redirect('/game?username='+req.body.username+'&room='+req.body.room);
+    const authStatus=Auth.authenticateJoin(req.body.username,req.body.room);
+    console.log(authStatus);
+    if(authStatus=='clear'){    //authentication clear
+        //redirecting to game route with query string including username and room
+        res.redirect('/game?username='+req.body.username+'&room='+req.body.room);
+    }
+    else{   //not authenticated
+        res.redirect('/?error='+authStatus);
+    }
+
 });
 app.get('/game',(req,res)=>{
     //req.query contains username and room info sending to client page via ejs parameter
@@ -33,41 +45,45 @@ app.get('/game',(req,res)=>{
 //socket connection
 io.on('connection',(socket)=>{
 
-    socket.on('on join',({playerUsername})=>{
+    socket.on('on join',({playerUsername,room})=>{
 
-        //emit current info to newly joined
-        socket.emit('new join info',Users.getUsers());
         const ID =socket.id;
+        socket.join(room);
+        //emit current info to newly joined
+        socket.emit('new join info',Users.getUsers(room));
         //adding this player to server data : USERS
-        Users.addUser(ID,playerUsername);
-
-        console.log(playerUsername+ ' joined');
+        Users.addUser(ID,playerUsername,room);
         //broadcast new player
-        socket.broadcast.emit('player added',{playerUsername,ID});
+        socket.broadcast.to(room).emit('player added',{playerUsername,ID});
     });
-    socket.on('self position',({x,y})=>{
+    //receive the position from client
+    socket.on('self position',({x,y,room})=>{
         const ID=socket.id;
-        socket.broadcast.emit('get position',{ID,x,y});
+        //broadcast this position to other players
+        socket.broadcast.to(room).emit('get position',{ID,x,y});
     });
 
-    //game events
-    socket.on('send game start',()=>{
-        console.log('game start');
-        socket.broadcast.emit('receive game start');
+    //incoming signal for game start
+    socket.on('send game start',(room)=>{
+        // update room status
+        Users.setRoomStatus(room,'running');
+        //broascast start event to all players
+        socket.broadcast.to(room).emit('receive game start');
     });
-    socket.on('send game won',(id)=>{
-        console.log(id + 'won the game');
-        socket.broadcast.emit('receive game won',id);   
+    //receive game won info
+    socket.on('send game won',(room)=>{
+        const ID=socket.id;
+        //roadcast winner
+        socket.broadcast.to(room).emit('receive game won',ID);   
     });
-    socket.on('send game restart',()=>{
-        console.log('game restarted');
-        socket.broadcast.emit('receive game restart'); 
+    //receive game restart signal
+    socket.on('send game restart',(room)=>{
+        // update room status
+        Users.setRoomStatus(room,'waiting');
+        //emit the restart signal
+        socket.broadcast.to(room).emit('receive game restart'); 
     });
 })
-
-
-
-
 
 
 

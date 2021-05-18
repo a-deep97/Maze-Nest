@@ -3,6 +3,8 @@
 //start game
 function startGame(){
     gameStatus='running';
+    //send game start signal to server
+    socket.emit('send game start',room);
     //update gamestatus info panel
     gameStatusInfo();
 }
@@ -10,6 +12,8 @@ function startGame(){
 //restart game
 function gameRestart(){
     gameStatus='ready';
+    //send signal to server for restart
+    socket.emit('send game restart',room);
     //update gamestatus info panel
     gameStatusInfo();
     reset();
@@ -45,7 +49,7 @@ function isWon(){
         //update gamestatus info panel
         gameStatusInfo();
         //send signal to server for winning
-        socket.emit('send game won');
+        socket.emit('send game won',room);
     }
     //if someone won
     else{

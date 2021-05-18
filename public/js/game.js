@@ -83,9 +83,10 @@ function update(){
     if(gameStatus=='running'){
         //control player movement
         controlPlayer();
+        //update player position in data
+        setPlayerPosition(player.x,player.y);
         //update enemny positions on game
         updateEnemyPos();
-
         //check ig game won
         isWon();
     }
@@ -94,6 +95,7 @@ function update(){
 // listen for game start
 socket.on('receive game start',()=>{
     gameStatus='running';
+    console.log('game started');
 });
 //listen to game won
 socket.on('receive game won',(id)=>{
@@ -109,7 +111,7 @@ socket.on('receive game restart',()=>{
 
 
 // on join event
-socket.emit('on join',{playerUsername});
+socket.emit('on join',{playerUsername,room});
 //get before join info
 socket.on('new join info',(USERS)=>{
     
@@ -134,7 +136,9 @@ socket.on('player added',({playerUsername,ID})=>{
     //newplayer added to online panel
     addOnlinePlayer(playerUsername);
 });
+
 //get other  player's positions
 socket.on('get position',({ID,x,y})=>{
+    console.log(ID);
     setPosition(ID,x,y);
 });

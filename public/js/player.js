@@ -7,7 +7,7 @@ let playerID;
 function setPlayerPosition(x,y){
     playerPosition={x,y};
     //emit current player position to server
-    socket.emit('self position',{x,y});
+    socket.emit('self position',{x,y,room});
 }
 function getPlayerPosition(){
     return playerPosition;   
