@@ -33,17 +33,17 @@ app.get('/game',(req,res)=>{
 //socket connection
 io.on('connection',(socket)=>{
 
-    socket.on('on join',({username})=>{
+    socket.on('on join',({playerUsername})=>{
 
         //emit current info to newly joined
         socket.emit('new join info',Users.getUsers());
         const ID =socket.id;
         //adding this player to server data : USERS
-        Users.addUser(ID,username);
+        Users.addUser(ID,playerUsername);
 
-        console.log(ID+ ' joined');
+        console.log(playerUsername+ ' joined');
         //broadcast new player
-        socket.broadcast.emit('player added',{username,ID});
+        socket.broadcast.emit('player added',{playerUsername,ID});
     });
     socket.on('self position',({x,y})=>{
         const ID=socket.id;

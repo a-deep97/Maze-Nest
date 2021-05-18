@@ -109,24 +109,30 @@ socket.on('receive game restart',()=>{
 
 
 // on join event
-const username='user';
-socket.emit('on join',{username});
+socket.emit('on join',{playerUsername});
 //get before join info
 socket.on('new join info',(USERS)=>{
+    
+    playerID=socket.id;
+
     //add previous users to database
     for(var i=0;i<USERS.length;i++){
-        insertPlayer(USERS[i].username,USERS[i].id);
-        //all current players added to online panel
-        addOnlinePlayer(USERS.username);
+        if(USERS.id!=playerID){ //checking for not inclusing self in the database
+            //insert existinf player info to local data
+            insertPlayer(USERS[i].username,USERS[i].id);
+            //all current players added to online panel
+            addOnlinePlayer(USERS[i].username);
+        }
     }
     //make player admin if applicable 
     makeAdmin();
 });
 //adding players to data
-socket.on('player added',({username,ID})=>{
-    insertPlayer(username,ID);
+socket.on('player added',({playerUsername,ID})=>{
+    //insert new player connected to local data
+    insertPlayer(playerUsername,ID);
     //newplayer added to online panel
-    addOnlinePlayer(username);
+    addOnlinePlayer(playerUsername);
 });
 //get other  player's positions
 socket.on('get position',({ID,x,y})=>{
