@@ -22,11 +22,12 @@ app.get('/',(req,res)=>{
     res.render('index');
 });
 app.post('/',(req,res)=>{
-    console.log(req.body);
-    res.redirect('/game');
+    //redirecting to game route with query string including username and room
+    res.redirect('/game?username='+req.body.username+'&room='+req.body.room);
 });
 app.get('/game',(req,res)=>{
-    res.render('game');
+    //req.query contains username and room info sending to client page via ejs parameter
+    res.render('game',{userData:req.query});
 });
 
 //socket connection
