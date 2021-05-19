@@ -16,7 +16,11 @@ function removePlayer(id){
     const index = players.findIndex(player=>player.id===id);
 
     if(index!==-1){
+        players[index].id=null;
         players[index].status=false;
+        players[index].username='';
+        players[index].pos_x=1800;
+        players[index].pos_y=1800;
     }
 }
 function setPosition(id,x,y){

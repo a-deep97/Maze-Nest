@@ -1,6 +1,9 @@
+const socket=io();
+
 /*----------------------------------------------------*/
 // event fired and signal sent to srver as player joins
 socket.emit('on join',{playerUsername,room});
+
 /*----------------------------------------------------*/
 //receive info regarding room after joining
 socket.on('new join info',(USERS)=>{
@@ -17,6 +20,7 @@ socket.on('new join info',(USERS)=>{
     //make player admin if applicable 
     makeAdmin();
 });
+
 /*----------------------------------------------------*/
 //adding players to data as they join
 socket.on('player added',({playerUsername,ID})=>{
@@ -25,4 +29,16 @@ socket.on('player added',({playerUsername,ID})=>{
     //newplayer added to online panel
     addOnlinePlayer(playerUsername);
 });
+
 /*----------------------------------------------------*/
+//check for any disconnection
+socket.on('user disconnected',({ID})=>{
+    removePlayer(ID);
+    //update online panel
+    updateOnlinePanel();
+});
+/*----------------------------------------------------*/
+//listen to server if admin left. all players will be redirected to home
+socket.on('admin left',({error})=>{
+    window.location='/?error='+error;
+});

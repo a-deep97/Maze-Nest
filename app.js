@@ -22,7 +22,6 @@ app.set('view engine','ejs');
 app.get('/',(req,res)=>{
     let error='';
     error=req.query.error;
-    console.log(error);
     res.render('index');
 });
 app.post('/',(req,res)=>{
@@ -35,7 +34,6 @@ app.post('/',(req,res)=>{
     else{   //not authenticated
         res.redirect('/?error='+authStatus);
     }
-
 });
 app.get('/game',(req,res)=>{
     //req.query contains username and room info sending to client page via ejs parameter
@@ -46,15 +44,36 @@ app.get('/game',(req,res)=>{
 io.on('connection',(socket)=>{
 
     socket.on('on join',({playerUsername,room})=>{
-
         const ID =socket.id;
         socket.join(room);
+        console.log(ID+' connected to server');
         //emit current info to newly joined
         socket.emit('new join info',Users.getUsers(room));
         //adding this player to server data : USERS
         Users.addUser(ID,playerUsername,room);
         //broadcast new player
         socket.broadcast.to(room).emit('player added',{playerUsername,ID});
+    });
+
+    //receive signal from client on disconnection
+    socket.on('disconnect',()=>{
+        const ID=socket.id;
+        //get player from server database
+        const player=Users.getUser(ID);
+        //remove player from server
+        Users.removeUser(ID);
+        //check if disconnecting user is admin
+        if(player&&player.admin){
+            Users.disposeRoom(player.room);
+            //broadast to all about the room colapse due to admin leaving
+            const error='admin left';
+            socket.broadcast.to(player.room).emit('admin left',{error});
+        }
+        else if(player){
+            console.log(player.username+' disconnected');
+            //broadcast user disconnection info
+            socket.broadcast.to(player.room).emit('user disconnected',{ID});
+        }
     });
     //receive the position from client
     socket.on('self position',({x,y,room})=>{

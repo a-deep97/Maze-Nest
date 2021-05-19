@@ -85,9 +85,20 @@ function addOnlinePlayer(name){
     panel.appendChild(onlinePlayer);
 }
 /* --------------------------------------------*/
-
-
-
+//update in game players panel
+function updateOnlinePanel(){
+    const panel=document.getElementById('online-players');
+    panel.innerHTML='';
+    for(var i=0;i<players.length;i++){
+        if(players[i].status){
+            const onlinePlayer=document.createElement('div');
+            onlinePlayer.className='online-player';
+            onlinePlayer.innerHTML=players[i].username;
+            panel.appendChild(onlinePlayer);
+        }
+    }
+}
+/* --------------------------------------------*/
 
 
 

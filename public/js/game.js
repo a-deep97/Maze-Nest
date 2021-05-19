@@ -17,8 +17,6 @@ const config={
         }
     }
 };
-//initiating socket instance
-const socket=io();
 
 //createing new game instance
 const Game=new Phaser.Game(config);
@@ -54,6 +52,7 @@ function create(){
         let enemy=this.physics.add.sprite(1800,1800,'Player');
         enemy.scaleX=0.3;
         enemy.scaleY=0.3;
+        enemy.visible=false;
         enemies.push(enemy);
     }
     //camera setup
@@ -87,6 +86,8 @@ function update(){
         setPlayerPosition(player.x,player.y);
         //update enemny positions on game
         updateEnemyPos();
+        //update enemies visibility
+        updateVisibility();
         //check ig game won
         isWon();
     }

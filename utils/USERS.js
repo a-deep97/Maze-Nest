@@ -37,15 +37,23 @@ function checkUsernameExists(username){
     }
     return false;
 }
+//dispose room if admin leaves
+function disposeRoom(roomName){
+    const index =rooms.findIndex(room=>room.roomName===roomName);
+    if(index!==-1){
+        console.log('room disposed');
+        return rooms.splice(index,1)[0];//note
+    }
+}
 // add player to users data
-function addUser(id,username){
+function addUser(id,username,room){
     var admin=false;
     if(users.length==0){
         var admin=true;
-        users.push({id,username,admin});
+        users.push({id,username,admin,room});
     }
     else{
-        users.push({id,username,admin});
+        users.push({id,username,admin,room});
     }
 }
 //remove player from user data
@@ -57,8 +65,12 @@ function removeUser(id){
     }
 }
 //get all users from each room
-function getUsers(){
-    return users;
+function getUsers(room){
+    return users.filter(user=>user.room==room);
+}
+//get required user
+function getUser(id){
+    return users.find(user=>user.id===id);
 }
 //get admin of each room
 function getAdmin(){
@@ -71,4 +83,4 @@ function getAdmin(){
     return null;
 }
 
-module.exports={createRoom,checkRoomStatus,checkRoom,setRoomStatus,checkUsernameExists,addUser,removeUser,getUsers,getAdmin};
+module.exports={createRoom,checkRoomStatus,checkRoom,setRoomStatus,checkUsernameExists,disposeRoom,addUser,removeUser,getUsers,getUser,getAdmin};

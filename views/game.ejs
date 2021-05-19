@@ -6,6 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/game.css">
     <script src="../socket.io/socket.io.js"></script>
+    <script>
+        window.onbeforeunload=confirmExit;
+        function confirmExit(){
+            const error= 'you came out';
+            window.location='/?error='+error;
+        }
+    </script>
     <title>Document</title>
 </head>
 <body>
@@ -25,7 +32,9 @@
                     <div id="panel1-controls">
                         <button class="control-buttons" id="start-button">start</button>
                         <button class="control-buttons" id="restart-button">restart</button>
-                        <button class="control-buttons" id="leave-button">Leave</button>
+                        <form action="/" method="get">
+                            <button class="control-buttons" id="leave-button">Leave</button>
+                        </form>
                     </div>
                     <div id="online-container">
                         <div id="online-heading">Online players</div>
@@ -61,5 +70,7 @@
         room='<%- userData.room%>';
     </script>
     <script src="./js/game.js"></script>
+    <script src="./js/connectionEvents.js"></script>
+    <script src="./js/gameEvents.js"></script>
 </body>
 </html>
