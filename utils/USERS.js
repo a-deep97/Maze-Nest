@@ -37,6 +37,18 @@ function checkUsernameExists(username){
     }
     return false;
 }
+//create new room
+function createRoom(roomName){
+    //check if room name already exist
+    if(checkRoom(roomName)){
+        return false;
+    }
+    else{
+        const newRoom={roomName,roomStatus:'waiting'};
+        rooms.push(newRoom);
+        return true;
+    }
+}
 //dispose room if admin leaves
 function disposeRoom(roomName){
     const index =rooms.findIndex(room=>room.roomName===roomName);
@@ -83,4 +95,4 @@ function getAdmin(){
     return null;
 }
 
-module.exports={createRoom,checkRoomStatus,checkRoom,setRoomStatus,checkUsernameExists,disposeRoom,addUser,removeUser,getUsers,getUser,getAdmin};
+module.exports={createRoom,checkRoomStatus,checkRoom,setRoomStatus,checkUsernameExists,createRoom,disposeRoom,addUser,removeUser,getUsers,getUser,getAdmin};

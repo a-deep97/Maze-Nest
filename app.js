@@ -20,8 +20,14 @@ app.set('view engine','ejs');
 //getting pages
 
 app.get('/',(req,res)=>{
-    let error='';
-    error=req.query.error;
+    let result='';
+    if(req.query.error){
+        result=req.query.error;
+    }
+    else if(req.query.success){
+        result=req.query.success;
+    }
+    console.log(result);
     res.render('index');
 });
 app.post('/',(req,res)=>{
@@ -33,6 +39,18 @@ app.post('/',(req,res)=>{
     }
     else{   //not authenticated
         res.redirect('/?error='+authStatus);
+    }
+});
+//post method for new room creating
+app.post('/new',(req,res)=>{
+    //if room creating succefull redirect to home with succefull error
+    if(Users.createRoom(req.body.roomName)){
+        const success='login to created room';
+        res.redirect('/?success='+success);
+    }
+    else{   //else redirect with error: not created
+        const error='room already exists'; 
+        res.redirect('/?error='+error);
     }
 });
 app.get('/game',(req,res)=>{
