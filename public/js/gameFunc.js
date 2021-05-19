@@ -72,6 +72,9 @@ function gameStatusInfo(){
         infoPanel.innerHTML='Escape is going on !! Move';
     }
     else if(gameStatus=='won'){
+        if(winner==playerUsername){
+            winner="you";
+        }
         infoPanel.innerHTML=winner + ' Escaped the maze !!';
     }
 }
@@ -97,6 +100,7 @@ function updateOnlinePanel(){
             panel.appendChild(onlinePlayer);
         }
     }
+
 }
 /* --------------------------------------------*/
 

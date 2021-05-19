@@ -78,16 +78,16 @@ function create(){
 //update function
 function update(){
     
+    //update player position in data
+    setPlayerPosition(player.x,player.y);
+    //update enemny positions on game
+    updateEnemyPos();
+    //update enemies visibility
+    updateVisibility();
     // game running loop
     if(gameStatus=='running'){
         //control player movement
         controlPlayer();
-        //update player position in data
-        setPlayerPosition(player.x,player.y);
-        //update enemny positions on game
-        updateEnemyPos();
-        //update enemies visibility
-        updateVisibility();
         //check ig game won
         isWon();
     }
