@@ -25,12 +25,15 @@ function removePlayer(id){
     const index = players.findIndex(player=>player.id===id);
 
     if(index!==-1){
+        const username=players[index].username;
         players[index].id=null;
         players[index].status=false;
         players[index].username='';
         players[index].pos_x=1800;
         players[index].pos_y=1800;
+        return username;
     }
+    return null;
 }
 /*------------------------------------------------------------- */
 

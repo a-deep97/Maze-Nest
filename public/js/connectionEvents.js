@@ -25,19 +25,24 @@ socket.on('new join info',(USERS)=>{
 
 /*----------------------------------------------------*/
 //adding players to data as they join
-socket.on('player added',({playerUsername,ID})=>{
+socket.on('player added',({username,ID})=>{
     //insert new player connected to local data
-    insertPlayer(playerUsername,ID);
+    insertPlayer(username,ID);
     //newplayer added to online panel
-    addOnlinePlayer(playerUsername);
+    addOnlinePlayer(username);
+    //insert info in panel
+    insertInfo(username+' joined');
 });
 
 /*----------------------------------------------------*/
 //check for any disconnection
 socket.on('user disconnected',({ID})=>{
-    removePlayer(ID);
+    const username=removePlayer(ID);
     //update online panel
     updateOnlinePanel();
+    //insert info in panel
+    console.log(';knlk');
+    insertInfo(username+' left');
 });
 /*----------------------------------------------------*/
 //listen to server if admin left. all players will be redirected to home

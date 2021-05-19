@@ -23,4 +23,9 @@ socket.on('receive game restart',()=>{
 socket.on('get position',({ID,x,y})=>{
     setPosition(ID,x,y);
 });
+
 /*----------------------------------------------------*/
+//receive player's message
+socket.on('receive message',({username,message})=>{
+    insertMessage(username,message);
+});

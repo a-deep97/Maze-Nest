@@ -28,3 +28,18 @@ leaveButton.addEventListener('click',()=>{
     
 });
 /*-------------------------------------------------*/ 
+
+/*---------message send button---------------------*/
+const chatForm=document.getElementById('chat-form');
+    chatForm.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        const message=e.target.message.value.trim();
+        
+        insertMessage('You',message);        
+        //send message to server
+        const username=playerUsername;
+        socket.emit('send message',{username,room,message});
+        // Clear message input
+        e.target.elements.message.value = '';
+});
+/*-------------------------------------------------*/

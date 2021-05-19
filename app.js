@@ -72,7 +72,8 @@ io.on('connection',(socket)=>{
         socket.emit('new join info',Users.getUsers(room));  //emit current info to newly joined
         Users.addUser(ID,playerUsername,room);  //adding this player to server data : USERS
         //broadcast new player info to other players
-        socket.broadcast.to(room).emit('player added',{playerUsername,ID});
+        const username=playerUsername;
+        socket.broadcast.to(room).emit('player added',{username,ID});
     });
 
     //receive signal from client on disconnection
@@ -121,6 +122,13 @@ io.on('connection',(socket)=>{
         Users.setRoomStatus(room,'waiting');
         //emit the restart signal
         socket.broadcast.to(room).emit('receive game restart'); 
+    });
+
+    //receive message from client
+    socket.on('send message',({username,room,message})=>{
+
+        //broadcast this message to other players
+        socket.broadcast.to(room).emit('receive message',{username,message});
     });
 });
 /*----------------------------------------------------------------*/

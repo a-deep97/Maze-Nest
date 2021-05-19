@@ -44,10 +44,16 @@
                 <div id="panel2">
                     <div id="panel2-heading">Chat box</div>
                     <div id="chat-section">
-                        <div id="chat-container"></div>
+                        <div id="chat-container">
+                            <!-- <div class="message-container">
+                                <div class="username-box"></div>
+                                <div class="message-box"></div>
+                                <div class="info-box"></div>
+                            </div> -->
+                        </div>
                         <form action="" id="chat-form">
-                            <input type="text" name="chat_message" id="chat-message">
-                            <button class="control-buttons" id="message-button">Send</button>
+                            <input type="text" id="message-input" name="message" placeholder="type message..." required>
+                            <button type="submit" id="message-send-btn">Send</button>
                         </form>
                     </div>
                 </div>
@@ -62,6 +68,7 @@
     <script src="./js/playersInfo.js"></script>
     <script src="./js/gameFunc.js"></script>
     <script src="./js/enemies.js"></script>
+    <script src="./js/chatUI.js"></script>
     <script src="./js/uiControls.js"></script>
     <script src="./js/player.js"></script>
     <script>

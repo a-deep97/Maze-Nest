@@ -54,7 +54,7 @@
 }
 #game-panels{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     height: 100%;
@@ -162,7 +162,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 20%;
+    height: 10%;
 }
 #chat-section{
     display: flex;
@@ -174,20 +174,81 @@
 }
 #chat-container{
     display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 95%;
+    height: 250px;
+    margin: 3px;
+    background-color: white;
+    overflow-y: auto;
+}
+#chat-container::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+#chat-container::-webkit-scrollbar
+{
+	width: 5px;
+	background-color: #F5F5F5;
+}
+
+#chat-container::-webkit-scrollbar-thumb
+{
+	background-color: var(--darkGrey);
+}
+.message-container{
+    display: flex;
+    justify-content: flex;
+    align-items: center;
+    width: 95%;
+    margin: 2px;
+    background-color: cadetblue;
+}
+.username-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2px;
+}
+.message-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2px;
+}
+.info-box{
+    display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 80%;
 }
 #chat-form{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 95%;
     height: 20%;
 }
 #chat-form input{
-    height: 70%;
+
+}
+#message-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 50%;
+    margin: 5px;
+}
+#message-send-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 60%;
     margin: 5px;
 }
 
