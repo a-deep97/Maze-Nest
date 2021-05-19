@@ -28,7 +28,6 @@ function setRoomStatus(roomName,status){
     const index=rooms.findIndex(room=>room.roomName===roomName);
     if(index!=-1){
         rooms[index].roomStatus=status;
-        console.log(rooms[index].roomStatus);
     }
 }
 //check if username already existing
