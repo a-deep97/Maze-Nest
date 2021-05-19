@@ -1,5 +1,8 @@
+/*-----------info of player added to the room currently-------- */
 const players=[];
+/*------------------------------------------------------------- */
 
+/*-----------insert a player to local data--------------------- */
 function insertPlayer(username,id){
     players.push({
         id: id,
@@ -9,9 +12,15 @@ function insertPlayer(username,id){
         pos_y:1800
     });
 }
+/*------------------------------------------------------------- */
+
+/*--------------get player info with their id------------------ */
 function getPlayer(id){
     return players.find(player=>player.id===id);
 }
+/*------------------------------------------------------------- */
+
+/*------------remove player info with their id----------------- */
 function removePlayer(id){
     const index = players.findIndex(player=>player.id===id);
 
@@ -23,6 +32,9 @@ function removePlayer(id){
         players[index].pos_y=1800;
     }
 }
+/*------------------------------------------------------------- */
+
+/*---set player position with their id(receive from server)-----*/
 function setPosition(id,x,y){
     const index = players.findIndex(player=>player.id===id);
     if(index!==-1&&players[index].status){
@@ -30,6 +42,9 @@ function setPosition(id,x,y){
         players[index].pos_y=y;
     }
 }
+/*------------------------------------------------------------- */
+
+/*----------get player position with their id-------------------*/
 function getPosition(id){
     const index = players.findIndex(player=>player.id===id);
     if(index!==-1&&players[index].status){
@@ -39,3 +54,4 @@ function getPosition(id){
     }
     return null;
 }
+/*------------------------------------------------------------- */

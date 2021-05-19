@@ -1,6 +1,6 @@
 
 
-//start game
+/*-----------game starting function--------------*/
 function startGame(){
     gameStatus='running';
     //send game start signal to server
@@ -8,8 +8,9 @@ function startGame(){
     //update gamestatus info panel
     gameStatusInfo();
 }
-/* --------------------------------------------*/
-//restart game
+/* ----------------------------------------------*/
+
+/*-----------game restarting function------------*/
 function gameRestart(){
     gameStatus='ready';
     //send signal to server for restart
@@ -19,12 +20,15 @@ function gameRestart(){
     reset();
 }
 /* --------------------------------------------*/
+
+/*-----------check gameover function-----------*/
 //check game over
 function isGameOver(){
 
 }
 /* --------------------------------------------*/
-//reset game
+
+/* ------------reset game----------------------*/
 function reset(){
     setPlayerPosition(1800,1800);
     winner='none';
@@ -40,7 +44,8 @@ function reset(){
     }
 }
 /* --------------------------------------------*/
-//check if player won
+
+/* ---------check if player won----------------*/
 function isWon(){
     //if you won
     if(player.x<player.width/2||player.x>4000+player.width/2||player.y<player.height/2||player.x>+3864+player.height/2){
@@ -51,17 +56,17 @@ function isWon(){
         //send signal to server for winning
         socket.emit('send game won',room);
     }
-    //if someone won
+    //if someone won , event received
     else{
         socket.on('receive game won',({username})=>{
-            console.log(username+' won');
             winner='username';
             gameStatus='won';
         });
     }
 }
 /* --------------------------------------------*/
-//game status info board
+
+/* --------game status info board--------------*/
 function gameStatusInfo(){
     const infoPanel=document.getElementById('game-status-container');
     infoPanel.innerHTML='';
@@ -78,8 +83,9 @@ function gameStatusInfo(){
         infoPanel.innerHTML=winner + ' Escaped the maze !!';
     }
 }
-/* --------------------------------------------*/
-//add online players to panel
+/* -----------------------------------------------*/
+
+/* ------add online players to panel--------------*/
 function addOnlinePlayer(name){
     const panel=document.getElementById('online-players');
     const onlinePlayer=document.createElement('div');
@@ -87,8 +93,9 @@ function addOnlinePlayer(name){
     onlinePlayer.innerHTML=name;
     panel.appendChild(onlinePlayer);
 }
-/* --------------------------------------------*/
-//update in game players panel
+/* ----------------------------------------------*/
+
+/* --------update in game players panel----------*/
 function updateOnlinePanel(){
     const panel=document.getElementById('online-players');
     panel.innerHTML='';
@@ -102,7 +109,7 @@ function updateOnlinePanel(){
     }
 
 }
-/* --------------------------------------------*/
+/* -----------------------------------------------*/
 
 
 

@@ -1,6 +1,5 @@
 
-
-
+/*---------------Start game button------------------------*/
 //start game
 const startButton= document.getElementById('start-button');
 startButton.addEventListener('click',()=>{
@@ -10,8 +9,9 @@ startButton.addEventListener('click',()=>{
         socket.emit('send game start');
     }
 });
+/*-------------------------------------------------*/
 
-//restart game
+/*-------------restart game button------------------------*/
 const restartButton= document.getElementById('restart-button');
 restartButton.addEventListener('click',()=>{
     if((gameStatus=='won'||gameStatus=='running')&&isPlayerAdmin){
@@ -20,9 +20,11 @@ restartButton.addEventListener('click',()=>{
         gameRestart();
     }
 });
+/*-------------------------------------------------*/
 
-//leave game
+/*-------------leave button------------------------*/
 const leaveButton= document.getElementById('leave-button');
 leaveButton.addEventListener('click',()=>{
     
-}); 
+});
+/*-------------------------------------------------*/ 

@@ -1,3 +1,4 @@
+/*---------------game configuration json-----------------*/
 const config={
     type: Phaser.AUTO,
     parent:'gameWindow',
@@ -17,31 +18,31 @@ const config={
         }
     }
 };
+/*-------------------------------------------------------------*/
 
-//createing new game instance
+/*----------creating new game instance-------------------------*/
 const Game=new Phaser.Game(config);
 
-/*------global  variables----------*/
+/*----------------global  variables----------------------------*/
 let player;
 let enemies=[];
 let speed=300;
 let gameStatus='ready';
 let winner='none';
-/*------on load functions----------*/
-//update gamestatus info panel
-gameStatusInfo();
-/*------------------------------------*/
+let playerLimit=5;
+/*--------------------------------------------------------------*/
 
-//preload function
+/*------------preload function----------------------------------*/
 function preload(){
 
     this.load.image('brick1','./media/brick1.jpg');
     this.load.image('Player','./media/player.png');
     this.load.tilemapTiledJSON('map','./Tilemap.json');
 }
-//create function
+/*--------------------------------------------------------------*/
+
+/*------------create function----------------------------------*/
 function create(){
-    //general
 
     //create player
     player=this.physics.add.sprite(1800,1800,'Player');
@@ -66,16 +67,14 @@ function create(){
     maze.setCollisionByExclusion(-1,true);
     maze.scaleX=4;
     maze.scaleY=4;
-
     //colliders
     this.physics.add.collider(player,maze);
-
     //key press event
     keys=this.input.keyboard.createCursorKeys();
-
-    
 }
-//update function
+/*--------------------------------------------------------------*/
+
+/*------------update function----------------------------------*/
 function update(){
     
     //update player position in data
@@ -92,3 +91,4 @@ function update(){
         isWon();
     }
 }
+/*--------------------------------------------------------------*/

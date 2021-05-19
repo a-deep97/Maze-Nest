@@ -19,6 +19,8 @@ socket.on('new join info',(USERS)=>{
     }
     //make player admin if applicable 
     makeAdmin();
+    //update game status info on panel
+    gameStatusInfo();
 });
 
 /*----------------------------------------------------*/
