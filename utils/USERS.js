@@ -1,14 +1,11 @@
-
+/*--------------------------------------------------------*/ 
 //variable to store current joined players
 const users=[];
 //current active rooms
 const testRoom={roomName:'test',roomStatus:'waiting'};
 const rooms=[];
 rooms.push(testRoom);
-//create a room
-function createRoom(){
-
-}
+/*--------------------------------------------------------*/
 //check  if room exists
 function checkRoom(roomName){
     if(rooms.find(room=>room.roomName===roomName)==null){   //room doesnt exist
@@ -16,13 +13,15 @@ function checkRoom(roomName){
     }
     return true;   //room exists
 }
-//function roomStatus
+/*--------------------------------------------------------*/
+//check roomStatus
 function checkRoomStatus(roomName){
     if(rooms.find(room=>room.roomName===roomName).roomStatus=='waiting'){
         return true;
     }
     return false;
 }
+/*--------------------------------------------------------*/
 //update room status
 function setRoomStatus(roomName,status){
     const index=rooms.findIndex(room=>room.roomName===roomName);
@@ -30,6 +29,7 @@ function setRoomStatus(roomName,status){
         rooms[index].roomStatus=status;
     }
 }
+/*--------------------------------------------------------*/
 //check if username already existing
 function checkUsernameExists(username){
     if(users.filter(user=>user.username===username).length>0){
@@ -37,6 +37,7 @@ function checkUsernameExists(username){
     }
     return false;
 }
+/*--------------------------------------------------------*/
 //create new room
 function createRoom(roomName){
     //check if room name already exist
@@ -49,6 +50,7 @@ function createRoom(roomName){
         return true;
     }
 }
+/*--------------------------------------------------------*/
 //dispose room if admin leaves
 function disposeRoom(roomName){
     const index =rooms.findIndex(room=>room.roomName===roomName);
@@ -57,6 +59,7 @@ function disposeRoom(roomName){
         return rooms.splice(index,1)[0];//note
     }
 }
+/*--------------------------------------------------------*/
 // add player to users data
 function addUser(id,username,room){
     var admin=false;
@@ -68,6 +71,7 @@ function addUser(id,username,room){
         users.push({id,username,admin,room});
     }
 }
+/*--------------------------------------------------------*/
 //remove player from user data
 function removeUser(id){
     const index =users.findIndex(user=>user.id===id);
@@ -76,14 +80,17 @@ function removeUser(id){
         return users.splice(index,1)[0];//note
     }
 }
+/*--------------------------------------------------------*/
 //get all users from each room
 function getUsers(room){
     return users.filter(user=>user.room==room);
 }
+/*--------------------------------------------------------*/
 //get required user
 function getUser(id){
     return users.find(user=>user.id===id);
 }
+/*--------------------------------------------------------*/
 //get admin of each room
 function getAdmin(){
 
@@ -94,5 +101,6 @@ function getAdmin(){
     }
     return null;
 }
-
+/*--------------------------------------------------------*/
 module.exports={createRoom,checkRoomStatus,checkRoom,setRoomStatus,checkUsernameExists,createRoom,disposeRoom,addUser,removeUser,getUsers,getUser,getAdmin};
+/*--------------------------------------------------------*/

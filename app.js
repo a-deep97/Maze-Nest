@@ -1,3 +1,4 @@
+/*----------------requiring libs ----------------*/
 const express=require('express');
 const app=express();
 const http=require('http').Server(app);
@@ -5,39 +6,39 @@ const io=require('socket.io')(http);
 const bodyParser=require('body-parser');
 const path=require('path');
 
+/*------------------setup client properties-----------------------*/
 app.use(bodyParser.urlencoded({ extended: true }));
-
-//importing util instances instance
-const Users=require('./utils/USERS');
-const Auth=require('./utils/authentication');
-
 //specifying static folder(public)
 app.use(express.static('public'));
-
 // setup view engine (i.e. : ejs)
 app.set('view engine','ejs');
 
-//getting pages
+/*----------importing util instances instance---------------------*/
+const Users=require('./utils/USERS');
+const Auth=require('./utils/authentication');
+/*----------------------------------------------------------------*/
 
+/*--------------get/post express methods--------------------------*/
+//get request method for home
 app.get('/',(req,res)=>{
-    let result='';
+    let result='';  //to store the query results after redirections
     if(req.query.error){
         result=req.query.error;
     }
     else if(req.query.success){
         result=req.query.success;
     }
-    console.log(result);
     res.render('index');
 });
+//post request method for joining
 app.post('/',(req,res)=>{
+    //authenticate login cred
     const authStatus=Auth.authenticateJoin(req.body.username,req.body.room);
-    console.log(authStatus);
     if(authStatus=='clear'){    //authentication clear
         //redirecting to game route with query string including username and room
         res.redirect('/game?username='+req.body.username+'&room='+req.body.room);
     }
-    else{   //not authenticated
+    else{   //not authenticated : redirect with error
         res.redirect('/?error='+authStatus);
     }
 });
@@ -53,23 +54,24 @@ app.post('/new',(req,res)=>{
         res.redirect('/?error='+error);
     }
 });
+//get request method for game page
 app.get('/game',(req,res)=>{
     //req.query contains username and room info sending to client page via ejs parameter
     res.render('game',{userData:req.query});
 });
+/*----------------------------------------------------------------*/
 
-//socket connection
+
+/*-------------------socket connections---------------------------*/
+//connection event when a client joins an socket instance created
 io.on('connection',(socket)=>{
-
+    // on join event received from client on join with their username and room
     socket.on('on join',({playerUsername,room})=>{
-        const ID =socket.id;
-        socket.join(room);
-        console.log(ID+' connected to server');
-        //emit current info to newly joined
-        socket.emit('new join info',Users.getUsers(room));
-        //adding this player to server data : USERS
-        Users.addUser(ID,playerUsername,room);
-        //broadcast new player
+        const ID =socket.id;    //getting socket id
+        socket.join(room);      //join the client the the room
+        socket.emit('new join info',Users.getUsers(room));  //emit current info to newly joined
+        Users.addUser(ID,playerUsername,room);  //adding this player to server data : USERS
+        //broadcast new player info to other players
         socket.broadcast.to(room).emit('player added',{playerUsername,ID});
     });
 
@@ -88,11 +90,11 @@ io.on('connection',(socket)=>{
             socket.broadcast.to(player.room).emit('admin left',{error});
         }
         else if(player){
-            console.log(player.username+' disconnected');
             //broadcast user disconnection info
             socket.broadcast.to(player.room).emit('user disconnected',{ID});
         }
     });
+
     //receive the position from client
     socket.on('self position',({x,y,room})=>{
         const ID=socket.id;
@@ -120,12 +122,13 @@ io.on('connection',(socket)=>{
         //emit the restart signal
         socket.broadcast.to(room).emit('receive game restart'); 
     });
-})
+});
+/*----------------------------------------------------------------*/
 
 
-
-//server listening to specified port
+/*-----------server listening to specified port--------------------*/
 const PORT=process.env.PORT||3000;
 http.listen(PORT,()=>{
     console.log('server listening at : '+PORT);
 });
+/*----------------------------------------------------------------*/
