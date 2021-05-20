@@ -21,14 +21,15 @@ const Auth=require('./utils/authentication');
 /*--------------get/post express methods--------------------------*/
 //get request method for home
 app.get('/',(req,res)=>{
-    let result='';  //to store the query results after redirections
-    if(req.query.error){
-        result=req.query.error;
+    let loginResult='';     //to store the query results after redirections from login
+    let createResult='';    //to store the query results after redirection from create
+    if(req.query.loginresult){
+        loginResult=req.query.loginresult;
     }
-    else if(req.query.success){
-        result=req.query.success;
+    else if(req.query.createresult){
+        createResult=req.query.createresult;
     }
-    res.render('index');
+    res.render('index',{loginResult,createResult});
 });
 //post request method for joining
 app.post('/',(req,res)=>{
@@ -39,19 +40,19 @@ app.post('/',(req,res)=>{
         res.redirect('/game?username='+req.body.username+'&room='+req.body.room);
     }
     else{   //not authenticated : redirect with error
-        res.redirect('/?error='+authStatus);
+        res.redirect('/?loginresult='+authStatus);
     }
 });
 //post method for new room creating
 app.post('/new',(req,res)=>{
     //if room creating succefull redirect to home with succefull error
     if(Users.createRoom(req.body.roomName)){
-        const success='login to created room';
-        res.redirect('/?success='+success);
+        const result='Room created! Now Login.';
+        res.redirect('/?createresult='+result);
     }
     else{   //else redirect with error: not created
-        const error='room already exists'; 
-        res.redirect('/?error='+error);
+        const result='room already exists'; 
+        res.redirect('/?createresult='+result);
     }
 });
 //get request method for game page

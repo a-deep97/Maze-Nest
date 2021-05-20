@@ -4,17 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/index.css">
     <title>Document</title>
 </head>
 <body>
-    <form action='/' method="POST">
-        <input type="text" name="username" required>
-        <input type="text" name="room" required>
-        <button type="submit">enter</button>
-    </form>
-    <form action="/new" method="post">
-        <input type="text" name="roomName" required>
-        <button type="submit"> Create</button>
-    </form>
+    <header></header>
+    <nav id="navbar"></nav>
+    <section id="main-section">
+        <div id="main-heading-container"></div>
+        <div id="main-container">
+            <div id="login-container">
+                <div id="login-form-container">
+                    <div id="login-heading">Login in</div>
+                    <%= console.log(loginResult); %> 
+                    <div id="login-error"><%= loginResult %> </div>
+                    <form action='/' id="login-form" method="POST">
+                        <input type="text" class="input-field" name="username" placeholder="Type Username..." required>
+                        <input type="text" class="input-field" name="room" placeholder="Type Room ..." required>
+                        <button type="submit" class="login-btn">Enter</button>
+                    </form>
+                </div>
+                <div id="create-form-container">
+                    <div id="create-heading">Create new room</div>
+                    <div id="create-error"><%= createResult %> </div>
+                    <form action="/new" id="create-form" method="post">
+                        <input type="text" class="input-field" name="roomName" required>
+                        <button type="submit" class="login-btn">Create</button>
+                    </form>
+                </div>
+            </div>
+            <div id="info-container"></div>
+        </div>
+    </section>
+    <section id="section2"></section>
+    <footer>Developed by Aman | contact: a.deep97@outlook.com</footer>
 </body>
 </html>
