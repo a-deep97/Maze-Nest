@@ -25,7 +25,7 @@ restartButton.addEventListener('click',()=>{
 /*-------------leave button------------------------*/
 const leaveButton= document.getElementById('leave-button');
 leaveButton.addEventListener('click',()=>{
-    
+    window.location='/';
 });
 /*-------------------------------------------------*/ 
 
@@ -42,4 +42,13 @@ const chatForm=document.getElementById('chat-form');
         // Clear message input
         e.target.elements.message.value = '';
 });
+/*-------------------------------------------------*/
+//spacebar event to detect spacebar in message input 
+chatForm.onkeyup=function(e){
+    if(e.keyCode==32){
+        const messageInput=document.getElementById('message-input');
+        messageInput.value+=' ';
+    }
+}
+
 /*-------------------------------------------------*/

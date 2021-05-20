@@ -9,7 +9,7 @@ function insertMessage(username,message){
     
     const usernameBox=document.createElement('div');
     usernameBox.className='username-box';
-    usernameBox.innerHTML=username+' : ';
+    usernameBox.innerHTML=username;
     const messageBox=document.createElement('div');
     messageBox.className='message-box';
     messageBox.innerHTML=message;

@@ -7,6 +7,8 @@ function startGame(){
     socket.emit('send game start',room);
     //update gamestatus info panel
     gameStatusInfo();
+    //put info to panel
+    insertInfo('You started the game');
 }
 /* ----------------------------------------------*/
 
@@ -17,6 +19,8 @@ function gameRestart(){
     socket.emit('send game restart',room);
     //update gamestatus info panel
     gameStatusInfo();
+    //put info to panel
+    insertInfo('You restarted the game');
     reset();
 }
 /* --------------------------------------------*/

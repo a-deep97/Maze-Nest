@@ -3,6 +3,7 @@
 socket.on('receive game start',()=>{
     gameStatus='running';
     gameStatusInfo();
+    insertInfo('Admin started the game');
 });
 /*----------------------------------------------------*/
 //listen to server to receive for game won signal
@@ -19,6 +20,7 @@ socket.on('receive game restart',()=>{
     gameStatus='ready';
     gameRestart();
     gameStatusInfo();
+    insertInfo('Admin restarted the game');
 });
 /*----------------------------------------------------*/
 //get other  player's positions from server with their id
