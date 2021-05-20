@@ -53,15 +53,10 @@ function isWon(){
         winner=playerUsername;
         //update gamestatus info panel
         gameStatusInfo();
+        //update info panel with you being won
+        insertInfo('You won the game');
         //send signal to server for winning
         socket.emit('send game won',room);
-    }
-    //if someone won , event received
-    else{
-        socket.on('receive game won',({username})=>{
-            winner='username';
-            gameStatus='won';
-        });
     }
 }
 /* --------------------------------------------*/
@@ -86,11 +81,15 @@ function gameStatusInfo(){
 /* -----------------------------------------------*/
 
 /* ------add online players to panel--------------*/
-function addOnlinePlayer(name){
+function addOnlinePlayer(name,admin){
     const panel=document.getElementById('online-players');
     const onlinePlayer=document.createElement('div');
     onlinePlayer.className='online-player';
-    onlinePlayer.innerHTML=name;
+    let adminTag='';
+    if(admin){
+        adminTag=' (admin)';
+    }
+    onlinePlayer.innerHTML=name+adminTag;
     panel.appendChild(onlinePlayer);
 }
 /* ----------------------------------------------*/
@@ -103,7 +102,11 @@ function updateOnlinePanel(){
         if(players[i].status){
             const onlinePlayer=document.createElement('div');
             onlinePlayer.className='online-player';
-            onlinePlayer.innerHTML=players[i].username;
+            let adminTag='';
+            if(players[i].admin){
+                adminTag='(admin)';
+            }
+            onlinePlayer.innerHTML=players[i].username+adminTag;
             panel.appendChild(onlinePlayer);
         }
     }

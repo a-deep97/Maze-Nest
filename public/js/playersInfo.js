@@ -3,11 +3,12 @@ const players=[];
 /*------------------------------------------------------------- */
 
 /*-----------insert a player to local data--------------------- */
-function insertPlayer(username,id){
+function insertPlayer(username,id,admin){
     players.push({
         id: id,
         username: username,
         status:true,
+        admin: admin,
         pos_x:1800,
         pos_y:1800
     });

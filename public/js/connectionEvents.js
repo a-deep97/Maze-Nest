@@ -8,13 +8,15 @@ socket.emit('on join',{playerUsername,room});
 //receive info regarding room after joining
 socket.on('new join info',(USERS)=>{
     playerID=socket.id;
+    //inser the info of you joined into panel
+    insertInfo('You joined');
     //add previous users to database
     for(var i=0;i<USERS.length;i++){
         if(USERS.id!=playerID){ //checking for not inclusing self in the database
             //insert existinf player info to local data
-            insertPlayer(USERS[i].username,USERS[i].id);
+            insertPlayer(USERS[i].username,USERS[i].id,USERS[i].admin);
             //all current players added to online panel
-            addOnlinePlayer(USERS[i].username);
+            addOnlinePlayer(USERS[i].username,USERS[i].admin);
         }
     }
     //make player admin if applicable 

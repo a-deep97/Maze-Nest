@@ -10,6 +10,8 @@ socket.on('receive game won',(id)=>{
     gameStatus='won';
     winner=getPlayer(id).username;
     gameStatusInfo();
+    //set won info to panel
+    insertInfo(winner+' won the game');
 });
 /*----------------------------------------------------*/
 //listen to server to receive for game restart signal
