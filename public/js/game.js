@@ -29,7 +29,9 @@ let enemies=[];
 let speed=300;
 let gameStatus='ready';
 let winner='none';
-let playerLimit=5;
+const playerLimit=7;//1 being self
+let playerCount=1;
+initiatePlayers();//inititate playes variable for vacancy of players limit
 /*--------------------------------------------------------------*/
 
 /*------------preload function----------------------------------*/
@@ -49,7 +51,7 @@ function create(){
     player.scaleX=0.3;
     player.scaleY=0.3;
     //create blank enemy players 
-    for(var i=0;i<5;i++){
+    for(var i=0;i<playerLimit;i++){
         let enemy=this.physics.add.sprite(1800,1800,'Player');
         enemy.scaleX=0.3;
         enemy.scaleY=0.3;

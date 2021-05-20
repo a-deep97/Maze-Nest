@@ -14,9 +14,8 @@ function startGame(){
 
 /*-----------game restarting function------------*/
 function gameRestart(){
+
     gameStatus='ready';
-    //send signal to server for restart
-    socket.emit('send game restart',room);
     //update gamestatus info panel
     gameStatusInfo();
     //put info to panel

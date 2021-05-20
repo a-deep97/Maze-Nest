@@ -18,12 +18,6 @@ function getPlayerPosition(){
 }
 /*------------------------------------------------------------------------*/
 
-/*---make current admin if applicable(first player or no other player)-----*/
-function makeAdmin(){
-    if(players.length==0){
-        isPlayerAdmin=true;
-    }
-}
 /*------------------------------------------------------------------------*/
 
 /*---------------function to control player-------------------------------*/

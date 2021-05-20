@@ -1,17 +1,33 @@
 /*-----------info of player added to the room currently-------- */
 const players=[];
+function initiatePlayers(){ //initiate players var
+    for(var i=0;i<playerLimit;i++){
+        players.push({id: null,
+            username: null,
+            status:false,
+            admin: null,
+            pos_x:1800,
+            pos_y:1800});
+    }
+}
 /*------------------------------------------------------------- */
 
 /*-----------insert a player to local data--------------------- */
 function insertPlayer(username,id,admin){
-    players.push({
-        id: id,
-        username: username,
-        status:true,
-        admin: admin,
-        pos_x:1800,
-        pos_y:1800
-    });
+    for(var i=0;i<playerLimit;i++){
+        if(!players[i].status){   // if player position is vacant
+             players[i]={
+                 id: id,
+                 username: username,
+                 status:true,
+                 admin: admin,
+                 pos_x:1800,
+                 pos_y:1800
+            };
+            playerCount++;
+            break;
+        }  
+    }
 }
 /*------------------------------------------------------------- */
 

@@ -18,6 +18,7 @@ socket.on('receive game won',(id)=>{
 //listen to server to receive for game restart signal
 socket.on('receive game restart',()=>{
     gameStatus='ready';
+    console.log('hello');
     gameRestart();
     gameStatusInfo();
     insertInfo('Admin restarted the game');

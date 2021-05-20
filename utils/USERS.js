@@ -2,9 +2,11 @@
 //variable to store current joined players
 const users=[];
 //current active rooms
-const testRoom={roomName:'test',roomStatus:'waiting'};
+const testRoom={roomName:'test',roomStatus:'waiting',playerCount:0};
 const rooms=[];
 rooms.push(testRoom);
+//limit
+const playerLimit=8;
 /*--------------------------------------------------------*/
 //check  if room exists
 function checkRoom(roomName){
@@ -45,17 +47,34 @@ function createRoom(roomName){
         return false;
     }
     else{
-        const newRoom={roomName,roomStatus:'waiting'};
+        const newRoom={roomName:roomName,roomStatus:'waiting',playerCount:1};
         rooms.push(newRoom);
         return true;
     }
+}
+/*--------------------------------------------------------*/
+//set player cout
+function setPlayerCount(change,roomName){
+
+    const index =rooms.findIndex(room=>room.roomName===roomName);
+    if(index!==-1){
+        rooms[index].playerCount+=change;
+    }
+} 
+/*--------------------------------------------------------*/
+//check player count
+function checkPlayerCount(roomName){
+    const index =rooms.findIndex(room=>room.roomName===roomName);
+    if(index!==-1){
+        return rooms[index].playerCount;
+    }
+    return playerLimit;
 }
 /*--------------------------------------------------------*/
 //dispose room if admin leaves
 function disposeRoom(roomName){
     const index =rooms.findIndex(room=>room.roomName===roomName);
     if(index!==-1){
-        console.log('room disposed');
         return rooms.splice(index,1)[0];//note
     }
 }
@@ -102,5 +121,5 @@ function getAdmin(){
     return null;
 }
 /*--------------------------------------------------------*/
-module.exports={createRoom,checkRoomStatus,checkRoom,setRoomStatus,checkUsernameExists,createRoom,disposeRoom,addUser,removeUser,getUsers,getUser,getAdmin};
+module.exports={createRoom,checkRoomStatus,checkRoom,setRoomStatus,checkUsernameExists,createRoom,setPlayerCount,checkPlayerCount,disposeRoom,addUser,removeUser,getUsers,getUser,getAdmin};
 /*--------------------------------------------------------*/

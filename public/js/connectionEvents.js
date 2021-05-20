@@ -20,7 +20,9 @@ socket.on('new join info',(USERS)=>{
         }
     }
     //make player admin if applicable 
-    makeAdmin();
+    if(USERS.length==0){    //this is first player
+        isPlayerAdmin=true;
+    }
     //update game status info on panel
     gameStatusInfo();
 });
@@ -29,7 +31,7 @@ socket.on('new join info',(USERS)=>{
 //adding players to data as they join
 socket.on('player added',({username,ID})=>{
     //insert new player connected to local data
-    insertPlayer(username,ID);
+    insertPlayer(username,ID,false);
     //newplayer added to online panel
     addOnlinePlayer(username);
     //insert info in panel
@@ -40,14 +42,14 @@ socket.on('player added',({username,ID})=>{
 //check for any disconnection
 socket.on('user disconnected',({ID})=>{
     const username=removePlayer(ID);
+    playerCount--;
     //update online panel
     updateOnlinePanel();
     //insert info in panel
-    console.log(';knlk');
     insertInfo(username+' left');
 });
 /*----------------------------------------------------*/
 //listen to server if admin left. all players will be redirected to home
 socket.on('admin left',({error})=>{
-    window.location='/?error='+error;
+    window.location='/?loginresult='+error;
 });

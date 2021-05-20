@@ -68,6 +68,8 @@ app.get('/game',(req,res)=>{
 io.on('connection',(socket)=>{
     // on join event received from client on join with their username and room
     socket.on('on join',({playerUsername,room})=>{
+        //increase playerCount in room
+        Users.setPlayerCount(1,room);
         const ID =socket.id;    //getting socket id
         socket.join(room);      //join the client the the room
         socket.emit('new join info',Users.getUsers(room));  //emit current info to newly joined
@@ -92,6 +94,8 @@ io.on('connection',(socket)=>{
             socket.broadcast.to(player.room).emit('admin left',{error});
         }
         else if(player){
+            //decrease playercount in room
+            Users.setPlayerCount(-1,player.room);
             //broadcast user disconnection info
             socket.broadcast.to(player.room).emit('user disconnected',{ID});
         }
