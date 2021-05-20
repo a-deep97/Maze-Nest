@@ -26,6 +26,7 @@ const Game=new Phaser.Game(config);
 /*----------------global  variables----------------------------*/
 let player;
 let enemies=[];
+let enemyNames=[];
 let speed=300;
 let gameStatus='ready';
 let winner='none';
@@ -57,6 +58,12 @@ function create(){
         enemy.scaleY=0.3;
         enemy.visible=false;
         enemies.push(enemy);
+    }
+    //create blank enemy name texts 
+    for(var i=0;i<playerLimit;i++){
+        let enemyName=this.add.text(1800,1750, 'helreoher', { fontFamily: "Courier",fill:"#c5c6c7",fontSize:20 });
+        enemyName.visible=false;
+        enemyNames.push(enemyName);
     }
     //camera setup
     let camera = this.cameras.main;
