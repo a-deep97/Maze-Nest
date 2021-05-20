@@ -1,4 +1,10 @@
 
+/* google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=KoHo:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root{
     /* ---color sceme--- 1 */
@@ -7,6 +13,13 @@
     --color3:   #c5c6c7;  
     --color4:   #66fcf1;
     --color5:   #45a29e;  
+
+    /* Fonts */
+    --font-roboto: 'Roboto', sans-serif;
+    --font-koho: 'KoHo', sans-serif;
+    --font-righteous: 'Righteous', cursive;
+    --font-monoton: 'Monoton', cursive;
+    --font-arcade: 'Press Start 2P', cursive;
 }
 html , body{
     margin: 0px;
@@ -73,10 +86,11 @@ header{
     align-items: center;
     width: 100%;
     height: 20%;
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
     color: var(--color3);
     background-color: black;
+    font-family: var(--font-righteous);
 }
 #login-error{
     display: flex;
@@ -116,6 +130,7 @@ header{
     font-weight: bold;
     color: var(--color3);
     background-color: black;
+    font-family: var(--font-righteous);
 }
 #create-error{
     display: flex;
@@ -144,6 +159,8 @@ header{
     outline: none;
     color: var(--color1);
     font-size: 1rem;
+    font-weight: bolder;
+    font-family: var(--font-roboto);
     border-radius: 10px;
     padding: 0px 10px;
 }
@@ -158,6 +175,8 @@ header{
     color: var(--color3);
     font-size: 1.2rem;
     border-radius: 10px;
+    font-weight: bolder;
+    font-family: var(--font-koho);
 }
 #info-container{
     display: flex;
