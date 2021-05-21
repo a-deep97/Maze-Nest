@@ -33,6 +33,7 @@ let gameStatus='ready';
 let winner='none';
 const playerLimit=7;//1 being self
 let playerCount=1;
+let winningCoordinates={left_x:0,right_x:4200,up_y:0,down_y:4200};
 initiatePlayers();//inititate playes variable for vacancy of players limit
 /*--------------------------------------------------------------*/
 

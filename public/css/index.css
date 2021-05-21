@@ -33,7 +33,7 @@ header{
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 70px;
+    height: 8vh;
     background-color: black;
 }
 #main-section{
@@ -42,7 +42,7 @@ header{
     align-items: center;
     flex-direction: column;
     width: 100%;
-    height: 700px;
+    height: 90vh;
     background-color: var(--color1);
 }
 #main-heading-container{
@@ -206,7 +206,7 @@ footer{
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 20px;
+    height: 2vh;
     background-color: black;
 
 }

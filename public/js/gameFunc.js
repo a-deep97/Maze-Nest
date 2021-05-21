@@ -63,7 +63,12 @@ function isWon(){
     }
 }
 /* --------------------------------------------*/
-
+function winningCriteria(){
+    if(player.x>winningCoordinates.right_x||player.x<winningCoordinates.left_x||player.y>winningCoordinates.down_y||player.y<winningCoordinates.up_y){
+        return true;
+    }
+    return false;
+}
 /* --------game status info board--------------*/
 function gameStatusInfo(){
     const infoPanel=document.getElementById('game-status-container');
