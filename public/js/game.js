@@ -27,6 +27,7 @@ const Game=new Phaser.Game(config);
 let player;
 let enemies=[];
 let enemyNames=[];
+let background;
 let speed=300;
 let gameStatus='ready';
 let winner='none';
@@ -41,16 +42,23 @@ function preload(){
     this.load.image('brick1','./media/brick1.jpg');
     this.load.image('Player','./media/player.png');
     this.load.tilemapTiledJSON('map','./Tilemap.json');
+    this.load.image('Background','./media/darkGround.png');
+    this.load.tilemapTiledJSON('ground','./groundTilemap.json');
 }
 /*--------------------------------------------------------------*/
 
 /*------------create function----------------------------------*/
 function create(){
 
+    //adding background
+    const ground=this.make.tilemap({key:'ground'});
+    const groundTileset=ground.addTilesetImage('darkGround','Background');
+    const backGround=ground.createStaticLayer('Tile Layer 1',groundTileset,0,0);
+
     //create player
     player=this.physics.add.sprite(1800,1800,'Player');
-    player.scaleX=0.3;
-    player.scaleY=0.3;
+    player.scaleX=0.5;
+    player.scaleY=0.5;
     //create blank enemy players 
     for(var i=0;i<playerLimit;i++){
         let enemy=this.physics.add.sprite(1800,1800,'Player');
@@ -74,8 +82,6 @@ function create(){
     const tileset=map.addTilesetImage('brick','brick1');
     const maze=map.createStaticLayer('Tile Layer 1',tileset,0,0);
     maze.setCollisionByExclusion(-1,true);
-    maze.scaleX=4;
-    maze.scaleY=4;
     //colliders
     this.physics.add.collider(player,maze);
     //key press event
