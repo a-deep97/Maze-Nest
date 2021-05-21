@@ -33,6 +33,7 @@ let gameStatus='ready';
 let winner='none';
 const playerLimit=7;//1 being self
 let playerCount=1;
+let landingPosition={x:1600,y:1800};
 let winningCoordinates={left_x:0,right_x:4200,up_y:0,down_y:4200};
 initiatePlayers();//inititate playes variable for vacancy of players limit
 /*--------------------------------------------------------------*/
@@ -63,12 +64,12 @@ function create(){
     const backGround=ground.createStaticLayer('Tile Layer 1',groundTileset,0,0);
 
     //create player
-    player=this.physics.add.sprite(1800,1800,'player');
+    player=this.physics.add.sprite(landingPosition.x,landingPosition.y,'player');
     player.scaleX=0.5;
     player.scaleY=0.5;
     //create blank enemy players 
     for(var i=0;i<playerLimit;i++){
-        let enemy=this.physics.add.sprite(1800,1800,'enemy');
+        let enemy=this.physics.add.sprite(landingPosition.x,landingPosition.y,'enemy');
         enemy.visible=false;
         enemy.scaleX=0.5;
         enemy.scaleY=0.5;
