@@ -51,7 +51,7 @@ function reset(){
 /* ---------check if player won----------------*/
 function isWon(){
     //if you won
-    if(player.x<player.width/2||player.x>4000+player.width/2||player.y<player.height/2||player.x>+3864+player.height/2){
+    if(winningCriteria()){
         gameStatus='won';
         winner=playerUsername;
         //update gamestatus info panel

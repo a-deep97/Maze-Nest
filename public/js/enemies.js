@@ -8,7 +8,7 @@ function updateEnemyPos(){
         enemies[i].y=players[i].pos_y;
         //set enemy name positions 
         enemyNames[i].x=players[i].pos_x-10;
-        enemyNames[i].y=players[i].pos_y-60;
+        enemyNames[i].y=players[i].pos_y-70;
     }
 }
 //update visibility of enemy objects

@@ -3,3 +3,4 @@ node_modules
 package.json
 public/Tilemap.json
 tileMaps
+public/media

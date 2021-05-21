@@ -40,10 +40,16 @@ initiatePlayers();//inititate playes variable for vacancy of players limit
 /*------------preload function----------------------------------*/
 function preload(){
 
-    this.load.image('brick1','./media/brick1.jpg');
-    this.load.image('Player','./media/player.png');
+    this.load.image('Wall','./media/walls/wall1.jpg');
+    //player image
+    this.load.image('player','./media/players/player1/right.png');
+    //enemy image
+    this.load.image('enemy','./media/players/enemy1/right.png');
+    
+    //map files
     this.load.tilemapTiledJSON('map','./Tilemap.json');
-    this.load.image('Background','./media/darkGround.png');
+    //ground files
+    this.load.image('Background','./media/grounds/ground1.png');
     this.load.tilemapTiledJSON('ground','./groundTilemap.json');
 }
 /*--------------------------------------------------------------*/
@@ -57,15 +63,15 @@ function create(){
     const backGround=ground.createStaticLayer('Tile Layer 1',groundTileset,0,0);
 
     //create player
-    player=this.physics.add.sprite(1800,1800,'Player');
+    player=this.physics.add.sprite(1800,1800,'player');
     player.scaleX=0.5;
     player.scaleY=0.5;
     //create blank enemy players 
     for(var i=0;i<playerLimit;i++){
-        let enemy=this.physics.add.sprite(1800,1800,'Player');
-        enemy.scaleX=0.3;
-        enemy.scaleY=0.3;
+        let enemy=this.physics.add.sprite(1800,1800,'enemy');
         enemy.visible=false;
+        enemy.scaleX=0.5;
+        enemy.scaleY=0.5;
         enemies.push(enemy);
     }
     //create blank enemy name texts 
@@ -80,7 +86,7 @@ function create(){
 
     //create map
     const map=this.make.tilemap({key:'map'});
-    const tileset=map.addTilesetImage('brick','brick1');
+    const tileset=map.addTilesetImage('brick','Wall');
     const maze=map.createStaticLayer('Tile Layer 1',tileset,0,0);
     maze.setCollisionByExclusion(-1,true);
     //colliders
