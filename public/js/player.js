@@ -4,6 +4,12 @@ let isPlayerAdmin=false;
 let playerUsername;
 let room;
 let playerID;
+/*------------set random landing positions----------------------*/
+function setLandingPosition(){
+    landingPosition.x = Math.floor(Math.random() * (landingLimitCoordinates.right - landingLimitCoordinates.left + 1) + landingLimitCoordinates.left);
+    landingPosition.y = Math.floor(Math.random() * (landingLimitCoordinates.down - landingLimitCoordinates.up + 1) + landingLimitCoordinates.up);
+}
+
 /*----store current player position in local database for sharing------- */
 function setPlayerPosition(x,y){
     playerPosition={x,y};

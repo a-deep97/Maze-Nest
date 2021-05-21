@@ -67,16 +67,16 @@ app.get('/game',(req,res)=>{
 //connection event when a client joins an socket instance created
 io.on('connection',(socket)=>{
     // on join event received from client on join with their username and room
-    socket.on('on join',({playerUsername,room})=>{
+    socket.on('on join',({playerUsername,room,landing_x,landing_y})=>{
         //increase playerCount in room
         Users.setPlayerCount(1,room);
         const ID =socket.id;    //getting socket id
         socket.join(room);      //join the client the the room
         socket.emit('new join info',Users.getUsers(room));  //emit current info to newly joined
-        Users.addUser(ID,playerUsername,room);  //adding this player to server data : USERS
+        Users.addUser(ID,playerUsername,room,landing_x,landing_y);  //adding this player to server data : USERS
         //broadcast new player info to other players
         const username=playerUsername;
-        socket.broadcast.to(room).emit('player added',{username,ID});
+        socket.broadcast.to(room).emit('player added',{username,ID,landing_x,landing_y});
     });
 
     //receive signal from client on disconnection

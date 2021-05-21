@@ -80,14 +80,14 @@ function disposeRoom(roomName){
 }
 /*--------------------------------------------------------*/
 // add player to users data
-function addUser(id,username,room){
+function addUser(id,username,room,landing_x,landing_y){
     var admin=false;
     if(users.length==0){
         var admin=true;
-        users.push({id,username,admin,room});
+        users.push({id,username,admin,room,landing_x,landing_y});
     }
     else{
-        users.push({id,username,admin,room});
+        users.push({id,username,admin,room,landing_x,landing_y});
     }
 }
 /*--------------------------------------------------------*/

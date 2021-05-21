@@ -2,7 +2,9 @@ const socket=io();
 
 /*----------------------------------------------------*/
 // event fired and signal sent to srver as player joins
-socket.emit('on join',{playerUsername,room});
+const landing_x=landingPosition.x;
+const landing_y=landingPosition.y;
+socket.emit('on join',{playerUsername,room,landing_x,landing_y});
 
 /*----------------------------------------------------*/
 //receive info regarding room after joining
@@ -17,6 +19,8 @@ socket.on('new join info',(USERS)=>{
             insertPlayer(USERS[i].username,USERS[i].id,USERS[i].admin);
             //all current players added to online panel
             addOnlinePlayer(USERS[i].username,USERS[i].admin);
+            // set positions
+            setPosition(USERS[i].id,USERS[i].landing_x,USERS[i].landing_y);
         }
     }
     //make player admin if applicable 
@@ -29,11 +33,13 @@ socket.on('new join info',(USERS)=>{
 
 /*----------------------------------------------------*/
 //adding players to data as they join
-socket.on('player added',({username,ID})=>{
+socket.on('player added',({username,ID,landing_x,landing_y})=>{
     //insert new player connected to local data
     insertPlayer(username,ID,false);
     //newplayer added to online panel
     addOnlinePlayer(username);
+    //set position
+    setPosition(ID,landing_x,landing_y);
     //insert info in panel
     insertInfo(username+' joined');
 });

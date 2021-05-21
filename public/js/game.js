@@ -33,9 +33,12 @@ let gameStatus='ready';
 let winner='none';
 const playerLimit=7;//1 being self
 let playerCount=1;
-let landingPosition={x:1600,y:1800};
+let landingPosition={x:1800,y:1800};
+let landingLimitCoordinates={left:1700,right:2100,up:1700,down:2100};
 let winningCoordinates={left_x:0,right_x:4200,up_y:0,down_y:4200};
 initiatePlayers();//inititate playes variable for vacancy of players limit
+setLandingPosition();//set random  landing position
+
 /*--------------------------------------------------------------*/
 
 /*------------preload function----------------------------------*/
