@@ -33,9 +33,9 @@ let gameStatus='ready';
 let winner='none';
 const playerLimit=7;//1 being self
 let playerCount=1;
-let landingPosition={x:1800,y:1800};
-let landingLimitCoordinates={left:1700,right:2100,up:1700,down:2100};
-let winningCoordinates={left_x:0,right_x:4200,up_y:0,down_y:4200};
+let landingPosition={x:7600,y:7600};
+let landingLimitCoordinates={left:7500,right:7800,up:7500,down:7800};
+let winningCoordinates={left_x:0,right_x:16200,up_y:0,down_y:16200};
 initiatePlayers();//inititate playes variable for vacancy of players limit
 setLandingPosition();//set random  landing position
 
@@ -44,17 +44,18 @@ setLandingPosition();//set random  landing position
 /*------------preload function----------------------------------*/
 function preload(){
 
-    this.load.image('Wall','./media/walls/wall1.jpg');
     //player image
     this.load.image('player','./media/players/player1/right.png');
     //enemy image
     this.load.image('enemy','./media/players/enemy1/right.png');
     
     //map files
-    this.load.tilemapTiledJSON('map','./Tilemap.json');
+    this.load.tilemapTiledJSON('map1a','./map1a.json');
+    this.load.image('wall','./media/walls/wall1.jpg');
+    
     //ground files
-    this.load.image('Background','./media/grounds/ground1.png');
-    this.load.tilemapTiledJSON('ground','./groundTilemap.json');
+    this.load.image('ground','./media/grounds/ground1.png');
+    this.load.tilemapTiledJSON('ground','./ground1.json');
 }
 /*--------------------------------------------------------------*/
 
@@ -63,8 +64,8 @@ function create(){
 
     //adding background
     const ground=this.make.tilemap({key:'ground'});
-    const groundTileset=ground.addTilesetImage('darkGround','Background');
-    const backGround=ground.createStaticLayer('Tile Layer 1',groundTileset,0,0);
+    const groundTileset=ground.addTilesetImage('groundTile','ground');
+    const backGround=ground.createStaticLayer('Tile Layer 1',groundTileset,-1000,-1000);
 
     //create player
     player=this.physics.add.sprite(landingPosition.x,landingPosition.y,'player');
@@ -89,8 +90,8 @@ function create(){
     camera.startFollow(player);
 
     //create map
-    const map=this.make.tilemap({key:'map'});
-    const tileset=map.addTilesetImage('brick','Wall');
+    const map=this.make.tilemap({key:'map1a'});
+    const tileset=map.addTilesetImage('brickTile','wall');
     const maze=map.createStaticLayer('Tile Layer 1',tileset,0,0);
     maze.setCollisionByExclusion(-1,true);
     //colliders
