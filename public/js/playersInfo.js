@@ -6,17 +6,19 @@ function initiatePlayers(){ //initiate players var
             username: null,
             status:false,
             admin: null,
-            pos_x:1800,
-            pos_y:1800,
+            pos_x:0,
+            pos_y:0,
             facing:null,
-            isMoving:false
+            isMoving:false,
+            landingPos_x:0,
+            landingPos_y:0
         });
     }
 }
 /*------------------------------------------------------------- */
 
 /*-----------insert a player to local data--------------------- */
-function insertPlayer(username,id,admin){
+function insertPlayer(username,id,admin,landing_x,landing_y){
     for(var i=0;i<playerLimit;i++){
         if(!players[i].status){   // if player position is vacant
              players[i]={
@@ -24,10 +26,12 @@ function insertPlayer(username,id,admin){
                  username: username,
                  status:true,
                  admin: admin,
-                 pos_x:1800,
-                 pos_y:1800,
+                 pos_x:0,
+                 pos_y:0,
                  facing:'right',
-                 isMoving:false
+                 isMoving:false,
+                 landingPos_x:landing_x,
+                 landingPos_y:landing_y,
             };
             playerCount++;
             break;
@@ -51,10 +55,12 @@ function removePlayer(id){
         players[index].id=null;
         players[index].status=false;
         players[index].username='';
-        players[index].pos_x=1800;
-        players[index].pos_y=1800;
+        players[index].pos_x=0;
+        players[index].pos_y=0;
         players[index].facing=null,
         players[index].isMoving=false;
+        players[index].landingPos_x=0;
+        players[index].landingPos_y=0;
         return username;
     }
     return null;

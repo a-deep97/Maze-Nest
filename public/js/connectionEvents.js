@@ -16,7 +16,7 @@ socket.on('new join info',(USERS)=>{
     for(var i=0;i<USERS.length;i++){
         if(USERS.id!=playerID){ //checking for not inclusing self in the database
             //insert existinf player info to local data
-            insertPlayer(USERS[i].username,USERS[i].id,USERS[i].admin);
+            insertPlayer(USERS[i].username,USERS[i].id,USERS[i].admin,USERS[i].landing_x,USERS[i].landing_y);
             //all current players added to online panel
             addOnlinePlayer(USERS[i].username,USERS[i].admin);
             // set positions
@@ -35,7 +35,7 @@ socket.on('new join info',(USERS)=>{
 //adding players to data as they join
 socket.on('player added',({username,ID,landing_x,landing_y})=>{
     //insert new player connected to local data
-    insertPlayer(username,ID,false);
+    insertPlayer(username,ID,false,landing_x,landing_y);
     //newplayer added to online panel
     addOnlinePlayer(username);
     //set position

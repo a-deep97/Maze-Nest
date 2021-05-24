@@ -33,17 +33,16 @@ function isGameOver(){
 
 /* ------------reset game----------------------*/
 function reset(){
-    setPlayerPosition(1800,1800);
+    player.x=playerPosition.x;
+    player.y=playerPosition.y;
     winner='none';
     player.body.setVelocityX(0);
     player.body.setVelocityY(0);
-    player.x=1800;
-    player.y=1800;
     for(var i=0;i<players.length;i++){
-        players[i].pos_x=1800;
-        players[i].pos_y=1800;
-        enemies[i].x=1800;
-        enemies[i].y=1800;
+        players[i].pos_x=players[i].landingPos_x;
+        players[i].pos_y=players[i].landingPos_y;
+        enemies[i].x=players[i].pos_x;
+        enemies[i].y=players[i].pos_y;
     }
 }
 /* --------------------------------------------*/

@@ -3,9 +3,7 @@
 //start game
 const startButton= document.getElementById('start-button');
 startButton.addEventListener('click',()=>{
-    console.log(gameStatus+' '+isPlayerAdmin);
     if(gameStatus=='ready'&&isPlayerAdmin){
-        console.log(2);
         startGame();
         //send signal to server for game start
         socket.emit('send game start');
