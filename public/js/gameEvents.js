@@ -25,8 +25,8 @@ socket.on('receive game restart',()=>{
 });
 /*----------------------------------------------------*/
 //get other  player's positions from server with their id
-socket.on('get position',({ID,x,y})=>{
-    setPosition(ID,x,y);
+socket.on('get position',({ID,pos_x,pos_y,facing,isMoving})=>{
+    setPosition(ID,pos_x,pos_y,facing,isMoving);
 });
 
 /*----------------------------------------------------*/

@@ -102,10 +102,10 @@ io.on('connection',(socket)=>{
     });
 
     //receive the position from client
-    socket.on('self position',({x,y,room})=>{
+    socket.on('self position',({pos_x,pos_y,room,facing,isMoving})=>{
         const ID=socket.id;
         //broadcast this position to other players
-        socket.broadcast.to(room).emit('get position',{ID,x,y});
+        socket.broadcast.to(room).emit('get position',{ID,pos_x,pos_y,facing,isMoving});
     });
 
     //incoming signal for game start

@@ -7,7 +7,10 @@ function initiatePlayers(){ //initiate players var
             status:false,
             admin: null,
             pos_x:1800,
-            pos_y:1800});
+            pos_y:1800,
+            facing:null,
+            isMoving:false
+        });
     }
 }
 /*------------------------------------------------------------- */
@@ -22,7 +25,9 @@ function insertPlayer(username,id,admin){
                  status:true,
                  admin: admin,
                  pos_x:1800,
-                 pos_y:1800
+                 pos_y:1800,
+                 facing:'right',
+                 isMoving:false
             };
             playerCount++;
             break;
@@ -48,6 +53,8 @@ function removePlayer(id){
         players[index].username='';
         players[index].pos_x=1800;
         players[index].pos_y=1800;
+        players[index].facing=null,
+        players[index].isMoving=false;
         return username;
     }
     return null;
@@ -55,11 +62,13 @@ function removePlayer(id){
 /*------------------------------------------------------------- */
 
 /*---set player position with their id(receive from server)-----*/
-function setPosition(id,x,y){
+function setPosition(id,x,y,facing,isMoving){
     const index = players.findIndex(player=>player.id===id);
     if(index!==-1&&players[index].status){
         players[index].pos_x=x;
         players[index].pos_y=y;
+        players[index].facing=facing;
+        players[index].isMoving=isMoving;
     }
 }
 /*------------------------------------------------------------- */

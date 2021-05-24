@@ -6,6 +6,21 @@ function updateEnemyPos(){
         //set enemy sprite positions 
         enemies[i].x=players[i].pos_x;
         enemies[i].y=players[i].pos_y;
+        //set enemy anims
+        if(camera.worldView.contains(players[i].pos_x,players[i].pos_y)){   //check if enemy is under camera view then animate
+            if(players[i].facing=='left'&&players[i].isMoving){
+                enemies[i].play('enemy_walk_left',true);
+            }
+            else if(players[i].facing=='left'&&!players[i].isMoving){
+                enemies[i].play('enemy_idle_left',true);
+            }
+            else if(players[i].facing=='right'&&players[i].isMoving){
+                enemies[i].play('enemy_walk_right',true);
+            }
+            else if(players[i].facing=='right'&&!players[i].isMoving){
+                enemies[i].play('enemy_idle_right',true);
+            }
+        }
         //set enemy name positions 
         enemyNames[i].x=players[i].pos_x-10;
         enemyNames[i].y=players[i].pos_y-70;

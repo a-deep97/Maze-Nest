@@ -24,6 +24,7 @@ const config={
 const Game=new Phaser.Game(config);
 
 /*----------------global  variables----------------------------*/
+let camera;
 let player;
 let enemies=[];
 let enemyNames=[];
@@ -48,7 +49,7 @@ function preload(){
     this.load.atlas('player','././media/players/player1/playerSprite.png','././media/players/player1/playerAtlas.json');
     
     //enemy image
-    this.load.image('enemy','./media/players/enemy1/right.png');
+    this.load.atlas('enemy','././media/players/enemy1/enemySprite.png','././media/players/enemy1/enemyAtlas.json');
     
     //map files
     this.load.tilemapTiledJSON('map1a','./map1a.json');
@@ -74,26 +75,24 @@ function create(){
     player.scaleY=0.5;
     //player anims
     this.anims.create({
-        key:'walk_right',
+        key:'player_walk_right',
         frames: this.anims.generateFrameNames('player',{prefix:'frame',start:0,end:1}),
-        frameRate: 10,
+        frameRate: 7,
     });
     this.anims.create({
-        key:'walk_left',
+        key:'player_walk_left',
         frames: this.anims.generateFrameNames('player',{prefix:'frame',start:2,end:3}),
-        frameRate: 10,
+        frameRate: 7,
     });
     this.anims.create({
-        key:'idle_right',
+        key:'player_idle_right',
         frames: [{key:'player',frame:'frame0'}],
-        frameRate: 4,
-        repeat: -1
+        frameRate: 1,
     });
     this.anims.create({
-        key:'idle_left',
+        key:'player_idle_left',
         frames: [{key:'player',frame:'frame2'}],
-        frameRate: 4,
-        repeat: -1
+        frameRate: 1,
     });
     //create blank enemy players 
     for(var i=0;i<playerLimit;i++){
@@ -103,6 +102,27 @@ function create(){
         enemy.scaleY=0.5;
         enemies.push(enemy);
     }
+    //enemy anims
+    this.anims.create({
+        key:'enemy_walk_right',
+        frames: this.anims.generateFrameNames('enemy',{prefix:'frame',start:0,end:1}),
+        frameRate: 7,
+    });
+    this.anims.create({
+        key:'enemy_walk_left',
+        frames: this.anims.generateFrameNames('enemy',{prefix:'frame',start:2,end:3}),
+        frameRate: 7,
+    });
+    this.anims.create({
+        key:'enemy_idle_right',
+        frames: [{key:'enemy',frame:'frame0'}],
+        frameRate: 1,
+    });
+    this.anims.create({
+        key:'enemy_idle_left',
+        frames: [{key:'enemy',frame:'frame2'}],
+        frameRate: 1,
+    });
     //create blank enemy name texts 
     for(var i=0;i<playerLimit;i++){
         let enemyName=this.add.text(1800,1750, 'helreoher', { fontFamily: "Courier",fill:"#c5c6c7",fontSize:20 });
@@ -110,7 +130,7 @@ function create(){
         enemyNames.push(enemyName);
     }
     //camera setup
-    let camera = this.cameras.main;
+    camera = this.cameras.main;
     camera.startFollow(player);
 
     //create map
