@@ -35,7 +35,12 @@ function controlPlayer(){
     const pos_y=playerPosition.y;
     const facing=playerMovingStatus.facing;
     const isMoving=playerMovingStatus.isMoving;
-    
+    if(Phaser.Input.Keyboard.JustDown(keys.left)||Phaser.Input.Keyboard.JustDown(keys.right)||Phaser.Input.Keyboard.JustDown(keys.up)||Phaser.Input.Keyboard.JustDown(keys.down)){
+        walkSound.play();//play on loop if any key is pressed
+    }
+    if(!keys.left.isDown&&!keys.right.isDown&&!keys.up.isDown&&!keys.down.isDown){
+        walkSound.stop();//stop the loop if no key is being pressed
+    }
     if(keys.left.isDown){
         player.body.setVelocityX(-1*speed);
         player.play('player_walk_left',true);

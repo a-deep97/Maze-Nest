@@ -58,6 +58,9 @@ function preload(){
     //ground files
     this.load.image('ground','./media/grounds/ground1.png');
     this.load.tilemapTiledJSON('ground','./ground1.json');
+
+    //sounds
+    this.load.audio('walkSound','././media/sounds/walking.mp3',{instances:1});
 }
 /*--------------------------------------------------------------*/
 
@@ -142,6 +145,9 @@ function create(){
     this.physics.add.collider(player,maze);
     //key press event
     keys=this.input.keyboard.createCursorKeys();
+    
+    //create sounds
+    walkSound=this.sound.add('walkSound',{loop:true});
 }
 /*--------------------------------------------------------------*/
 
