@@ -45,7 +45,8 @@ setLandingPosition();//set random  landing position
 function preload(){
 
     //player image
-    this.load.image('player','./media/players/player1/right.png');
+    this.load.atlas('player','././media/players/player1/playerSprite.png','././media/players/player1/playerAtlas.json');
+    
     //enemy image
     this.load.image('enemy','./media/players/enemy1/right.png');
     
@@ -71,6 +72,29 @@ function create(){
     player=this.physics.add.sprite(landingPosition.x,landingPosition.y,'player');
     player.scaleX=0.5;
     player.scaleY=0.5;
+    //player anims
+    this.anims.create({
+        key:'walk_right',
+        frames: this.anims.generateFrameNames('player',{prefix:'frame',start:0,end:1}),
+        frameRate: 10,
+    });
+    this.anims.create({
+        key:'walk_left',
+        frames: this.anims.generateFrameNames('player',{prefix:'frame',start:2,end:3}),
+        frameRate: 10,
+    });
+    this.anims.create({
+        key:'idle_right',
+        frames: [{key:'player',frame:'frame0'}],
+        frameRate: 4,
+        repeat: -1
+    });
+    this.anims.create({
+        key:'idle_left',
+        frames: [{key:'player',frame:'frame2'}],
+        frameRate: 4,
+        repeat: -1
+    });
     //create blank enemy players 
     for(var i=0;i<playerLimit;i++){
         let enemy=this.physics.add.sprite(landingPosition.x,landingPosition.y,'enemy');
