@@ -1,0 +1,60 @@
+{
+    "frames": [
+        {
+            "filename": "frame0",
+            "frame": {
+                "x": 0,
+                "y": 0,
+                "w": 160,
+                "h": 199
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "frame1",
+            "frame": {
+                "x": 160,
+                "y": 0,
+                "w": 160,
+                "h": 199
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "frame2",
+            "frame": {
+                "x": 320,
+                "y": 0,
+                "w": 160,
+                "h": 199
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "frame3",
+            "frame": {
+                "x": 480,
+                "y": 0,
+                "w": 160,
+                "h": 199
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "description": "",
+        "web": ""
+    }
+}
