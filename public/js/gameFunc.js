@@ -33,8 +33,8 @@ function isGameOver(){
 
 /* ------------reset game----------------------*/
 function reset(){
-    player.x=playerPosition.x;
-    player.y=playerPosition.y;
+    player.x=landingPosition.x;
+    player.y=landingPosition.y;
     winner='none';
     player.body.setVelocityX(0);
     player.body.setVelocityY(0);
