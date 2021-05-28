@@ -12,7 +12,7 @@ startButton.addEventListener('click',()=>{
 /*-------------------------------------------------*/
 
 /*-------------restart game button------------------------*/
-const restartButton= document.getElementById('restart-button');
+const restartButton= document.getElementById('reset-button');
 restartButton.addEventListener('click',()=>{
     if((gameStatus=='won'||gameStatus=='running')&&isPlayerAdmin){
         //emit about the restart event
