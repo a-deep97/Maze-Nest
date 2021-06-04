@@ -60,7 +60,6 @@ function createRoom(roomName){
 /*--------------------------------------------------------*/
 //get map number from room
 function getMap(roomName){
-    console.log(rooms);
     const index =rooms.findIndex(room=>room.roomName===roomName);
     if(index!==-1){
         return rooms[index].mapNumber;

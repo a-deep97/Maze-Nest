@@ -59,7 +59,11 @@ app.post('/new',(req,res)=>{
 });
 //get request method for game page
 app.get('/game',(req,res)=>{
-    
+
+    //check if room exists or not
+    if(!Users.checkRoom(req.query.room)){
+        res.redirect('/');
+    }
     //get map number from room info
     const mapNumber=Users.getMap(req.query.room);
     //req.query contains username and room info sending to client page via ejs parameter
