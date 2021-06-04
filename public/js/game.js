@@ -26,6 +26,7 @@ const Game=new Phaser.Game(config);
 /*----------------global  variables----------------------------*/
 let camera;
 let player;
+let mapNumber;
 let enemies=[];
 let enemyNames=[];
 let background;
@@ -52,7 +53,7 @@ function preload(){
     this.load.atlas('enemy','././media/players/enemy1/enemySprite.png','././media/players/enemy1/enemyAtlas.json');
     
     //map files
-    this.load.tilemapTiledJSON('map1a','./maps/map1a.json');
+    this.load.tilemapTiledJSON('map1a','./maps/map'+mapNumber+'.json');
     this.load.image('wall','./media/walls/wall1.jpg');
     
     //ground files

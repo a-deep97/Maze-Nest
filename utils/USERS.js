@@ -1,8 +1,11 @@
+/*----------importing util instances instance---------------------*/
+const maps=require('./maps');
+
 /*--------------------------------------------------------*/ 
 //variable to store current joined players
 const users=[];
 //current active rooms
-const testRoom={roomName:'test',roomStatus:'waiting',playerCount:0};
+const testRoom={roomName:'test',roomStatus:'waiting',playerCount:0,mapNumber:1};
 const rooms=[];
 rooms.push(testRoom);
 //limit
@@ -47,9 +50,20 @@ function createRoom(roomName){
         return false;
     }
     else{
-        const newRoom={roomName:roomName,roomStatus:'waiting',playerCount:1};
+        const mapNumber=maps.createMap();
+        const newRoom={roomName:roomName,roomStatus:'waiting',playerCount:1,mapNumber:mapNumber};
         rooms.push(newRoom);
         return true;
+    }
+
+}
+/*--------------------------------------------------------*/
+//get map number from room
+function getMap(roomName){
+    console.log(rooms);
+    const index =rooms.findIndex(room=>room.roomName===roomName);
+    if(index!==-1){
+        return rooms[index].mapNumber;
     }
 }
 /*--------------------------------------------------------*/
@@ -121,5 +135,5 @@ function getAdmin(){
     return null;
 }
 /*--------------------------------------------------------*/
-module.exports={createRoom,checkRoomStatus,checkRoom,setRoomStatus,checkUsernameExists,createRoom,setPlayerCount,checkPlayerCount,disposeRoom,addUser,removeUser,getUsers,getUser,getAdmin};
+module.exports={createRoom,getMap,checkRoomStatus,checkRoom,setRoomStatus,checkUsernameExists,createRoom,setPlayerCount,checkPlayerCount,disposeRoom,addUser,removeUser,getUsers,getUser,getAdmin};
 /*--------------------------------------------------------*/

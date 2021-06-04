@@ -59,8 +59,11 @@ app.post('/new',(req,res)=>{
 });
 //get request method for game page
 app.get('/game',(req,res)=>{
+    
+    //get map number from room info
+    const mapNumber=Users.getMap(req.query.room);
     //req.query contains username and room info sending to client page via ejs parameter
-    res.render('game',{userData:req.query});
+    res.render('game',{userData:req.query,mapNumber:mapNumber});
 });
 /*----------------------------------------------------------------*/
 
