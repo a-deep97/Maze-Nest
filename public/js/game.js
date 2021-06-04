@@ -52,12 +52,12 @@ function preload(){
     this.load.atlas('enemy','././media/players/enemy1/enemySprite.png','././media/players/enemy1/enemyAtlas.json');
     
     //map files
-    this.load.tilemapTiledJSON('map1a','./map1a.json');
+    this.load.tilemapTiledJSON('map1a','./maps/map1a.json');
     this.load.image('wall','./media/walls/wall1.jpg');
     
     //ground files
     this.load.image('ground','./media/grounds/ground1.png');
-    this.load.tilemapTiledJSON('ground','./ground1.json');
+    this.load.tilemapTiledJSON('ground','./maps/ground1.json');
 
     //sounds
     this.load.audio('walkSound','././media/sounds/walking.mp3',{instances:1});
