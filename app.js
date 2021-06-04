@@ -1,4 +1,4 @@
-//version: testing phase
+//version: Beta 1.0
 
 /*----------------requiring libs ----------------*/
 const express=require('express');
