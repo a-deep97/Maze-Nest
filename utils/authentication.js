@@ -1,16 +1,17 @@
 
-//importing USERS instance
-const Users=require('./USERS');
+/*----------importing util libs---------------------*/
+const Users=require('./users');
+const Rooms=require('./rooms');
 
 //authenticate the joining player and send applicable result
 function authenticateJoin(username,room){
-    if(!Users.checkRoom(room)){
+    if(!Rooms.checkRoom(room)){
         return 'room doesn\'t exist';
     }
-    else if(Users.checkPlayerCount(room)>7){
+    else if(Rooms.checkPlayerCount(room)>7){
         return 'room full';
     }
-    else if(!Users.checkRoomStatus(room)){
+    else if(!Rooms.checkRoomStatus(room)){
         return 'game is running , join later';
     }
     else if(Users.checkUsernameExists(username)){

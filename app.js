@@ -16,7 +16,8 @@ app.use(express.static('public'));
 app.set('view engine','ejs');
 
 /*----------importing util instances instance---------------------*/
-const Users=require('./utils/USERS');
+const Users=require('./utils/users');
+const Rooms=require('./utils/rooms');
 const Auth=require('./utils/authentication');
 /*----------------------------------------------------------------*/
 
@@ -48,7 +49,7 @@ app.post('/',(req,res)=>{
 //post method for new room creating
 app.post('/new',(req,res)=>{
     //if room creating succefull redirect to home with succefull error
-    if(Users.createRoom(req.body.roomName)){
+    if(Rooms.createRoom(req.body.roomName)){
         const result='Room created! Now Login.';
         res.redirect('/?createresult='+result);
     }
@@ -61,11 +62,11 @@ app.post('/new',(req,res)=>{
 app.get('/game',(req,res)=>{
 
     //check if room exists or not
-    if(!Users.checkRoom(req.query.room)){
+    if(!Rooms.checkRoom(req.query.room)){
         res.redirect('/');
     }
     //get map number from room info
-    const mapNumber=Users.getMap(req.query.room);
+    const mapNumber=Rooms.getMap(req.query.room);
     //req.query contains username and room info sending to client page via ejs parameter
     res.render('game',{userData:req.query,mapNumber:mapNumber});
 });
@@ -78,7 +79,7 @@ io.on('connection',(socket)=>{
     // on join event received from client on join with their username and room
     socket.on('on join',({playerUsername,room,landing_x,landing_y})=>{
         //increase playerCount in room
-        Users.setPlayerCount(1,room);
+        Rooms.setPlayerCount(1,room);
         const ID =socket.id;    //getting socket id
         socket.join(room);      //join the client the the room
         socket.emit('new join info',Users.getUsers(room));  //emit current info to newly joined
@@ -97,14 +98,14 @@ io.on('connection',(socket)=>{
         Users.removeUser(ID);
         //check if disconnecting user is admin
         if(player&&player.admin){
-            Users.disposeRoom(player.room);
+            Rooms.disposeRoom(player.room);
             //broadast to all about the room colapse due to admin leaving
             const error='admin left';
             socket.broadcast.to(player.room).emit('admin left',{error});
         }
         else if(player){
             //decrease playercount in room
-            Users.setPlayerCount(-1,player.room);
+            Rooms.setPlayerCount(-1,player.room);
             //broadcast user disconnection info
             socket.broadcast.to(player.room).emit('user disconnected',{ID});
         }
@@ -120,7 +121,7 @@ io.on('connection',(socket)=>{
     //incoming signal for game start
     socket.on('send game start',(room)=>{
         // update room status
-        Users.setRoomStatus(room,'running');
+        Rooms.setRoomStatus(room,'running');
         //broascast start event to all players
         socket.broadcast.to(room).emit('receive game start');
     });
@@ -133,7 +134,7 @@ io.on('connection',(socket)=>{
     //receive game restart signal
     socket.on('send game restart',(room)=>{
         // update room status
-        Users.setRoomStatus(room,'waiting');
+        Rooms.setRoomStatus(room,'waiting');
         //emit the restart signal
         socket.broadcast.to(room).emit('receive game restart'); 
     });
